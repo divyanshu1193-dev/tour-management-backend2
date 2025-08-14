@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Management System - Government of India</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Official Government Header with User & Notifications -->
+    <div class="official-header">
+        <div class="gov-branding">
+            <div class="national-emblem">
+                <i class="fas fa-university" style="font-size: 3rem; color: #000080;"></i>
+            </div>
+            <div class="gov-text">
+                <h2>Government of India / भारत सरकार</h2>
+                <h2>Urban Development and Housing Department / नगरीय विकास एवं आवास विभाग</h2>
+                <h3>Tour Management System</h3>
+                <p></p>
+            </div>
+        </div>
+        <div class="gov-nav-right">
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </div>
+            <div class="user-profile dropdown">
+                <img src="https://via.placeholder.com/40x40" alt="User" class="profile-img">
+                <span id="officialUserName">Dr. DHARMENDRA SINGH YADAV</span>
+                <i class="fas fa-chevron-down"></i>
+                <div class="dropdown-content">
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="loginPage" class="login-page active">
+        <div class="login-container">
+            <div class="login-form-wrapper">
+                <div class="login-header">
+                    <div class="logo">
+                        <i class="fas fa-route"></i>
+                        <h1>Tour Management System</h1>
+                    </div>
+                    <p>Government of India - Digital India Initiative</p>
+                </div>
+                
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">Sign In</button>
+                    
+                    <div class="demo-credentials">
+                        <p><strong>Demo Credentials:</strong></p>
+                        <p>Admin: admin@demo.com / admin123</p>
+                        <p>User: user@demo.com / user123</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <!-- Admin Dashboard -->
+                    <li class="nav-item active admin-only" data-page="dashboard">
+                        <a href="#"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a>
+                    </li>
+                    
+                    <!-- User Dashboard -->
+                    <li class="nav-item user-only" data-page="user-dashboard">
+                        <a href="#"><i class="fas fa-user-circle"></i> My Dashboard</a>
+                    </li>
+
+                    <li class="nav-item user-only" data-page="new-application">
+                        <a href="#"><i class="fas fa-plus-circle"></i> New Application</a>
+                    </li>
+                    
+                    <!-- Merged My Applications Page -->
+                    <li class="nav-item user-only" data-page="my-applications">
+                        <a href="#"><i class="fas fa-file-invoice"></i> My Applications</a>
+                    </li>
+                    
+                    <!-- My Tours -->
+                    <li class="nav-item user-only" data-page="my-tours">
+                        <a href="#"><i class="fas fa-route"></i> My Tours</a>
+                    </li>
+                    
+                    <!-- Admin-specific pages -->
+                    <li class="nav-item admin-only" data-page="tours">
+                        <a href="#"><i class="fas fa-map-marked-alt"></i> All Tours</a>
+                    </li>
+                    
+                    <li class="nav-item admin-only" data-page="locations">
+                        <a href="#"><i class="fas fa-map-marker-alt"></i> Real-time Locations</a>
+                    </li>
+                    
+                    <li class="nav-item admin-only" data-page="users">
+                        <a href="#"><i class="fas fa-users"></i> User Management</a>
+                    </li>
+                    
+                    <li class="nav-item admin-only" data-page="approval-queue">
+                        <a href="#"><i class="fas fa-tasks"></i> Approval Queue</a>
+                    </li>
+                    
+                    <!-- Common pages -->
+                    <li class="nav-item" data-page="reports">
+                        <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
+                    </li>
+                    
+                    <li class="nav-item" data-page="alerts">
+                        <a href="#"><i class="fas fa-exclamation-triangle"></i> Alerts</a>
+                    </li>
+                    
+                    <li class="nav-item" data-page="settings">
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Admin Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <div class="page-header">
+                    <h1>Admin Dashboard Overview</h1>
+                    <div class="header-actions">
+                        <button class="btn btn-success btn-enhanced-tour">
+                            <i class="fas fa-plus-circle"></i> Apply for Tour (यात्रा के लिए आवेदन करें)
+                        </button>
+                        <button class="btn btn-primary" id="createTourBtn">
+                            <i class="fas fa-plus"></i> Create New Tour
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon active">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Active Tours</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon completed">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>48</h3>
+                            <p>Completed Tours</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>3</h3>
+                            <p>Alerts</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon info">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>24</h3>
+                            <p>Active Employees</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <!-- Real-time Map -->
+                    <div class="dashboard-card map-card">
+                        <div class="card-header">
+                            <h3>Real-time Employee Locations</h3>
+                            <button class="btn btn-secondary btn-sm" id="refreshMapBtn">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div id="realtime-map" class="map-container">
+                                <div class="map-placeholder">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    <p>Interactive Map View</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Tours and Alerts -->
+                    <div class="dashboard-sidebar">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>Recent Applications</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="tour-list">
+                                    <div class="tour-item">
+                                        <div class="tour-avatar">JD</div>
+                                        <div class="tour-details">
+                                            <h4>John Doe</h4>
+                                            <p>Mumbai → Delhi</p>
+                                            <span class="tour-time">09:30 AM</span>
+                                        </div>
+                                        <div class="tour-status active">Active</div>
+                                    </div>
+                                    <div class="tour-item">
+                                        <div class="tour-avatar">SM</div>
+                                        <div class="tour-details">
+                                            <h4>Sarah Miller</h4>
+                                            <p>Bangalore → Chennai</p>
+                                            <span class="tour-time">11:00 AM</span>
+                                        </div>
+                                        <div class="tour-status pending">Pending</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>Recent Alerts</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="alert-list">
+                                    <div class="alert-item warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <div class="alert-details">
+                                            <p>Employee idle for 30+ minutes</p>
+                                            <span>John Doe • 5 min ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="alert-item danger">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <div class="alert-details">
+                                            <p>Geofence breach detected</p>
+                                            <span>Mike Johnson • 12 min ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Dashboard Page -->
+            <div id="user-dashboard" class="page">
+                <div class="page-header">
+                    <h1>My Dashboard</h1>
+                    <div class="header-actions">
+                        <button class="btn btn-success btn-enhanced-tour">
+                            <i class="fas fa-plus-circle"></i> Apply for Tour (यात्रा के लिए आवेदन करें)
+                        </button>
+                        <button class="btn btn-primary" id="newRequestBtn">
+                            <i class="fas fa-plus"></i> Quick Request
+                        </button>
+                    </div>
+                </div>
+
+                <!-- User Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon active">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>3</h3>
+                            <p>Pending Requests</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon completed">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Completed Tours</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>2</h3>
+                            <p>Active Tours</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon info">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>Upcoming Tours</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dashboard-content">
+                    <!-- My Recent Tours -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>My Recent Tours</h3>
+                            <a href="#" onclick="app.navigateTo('my-tours')" class="btn btn-secondary btn-sm">
+                                View All
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <div class="user-tour-list">
+                                <div class="user-tour-item">
+                                    <div class="tour-info">
+                                        <h4>Business Meeting</h4>
+                                        <p>Mumbai → Delhi</p>
+                                        <span class="tour-date">Aug 10, 2025</span>
+                                    </div>
+                                    <div class="tour-status approved">Approved</div>
+                                </div>
+                                <div class="user-tour-item">
+                                    <div class="tour-info">
+                                        <h4>Client Visit</h4>
+                                        <p>Bangalore → Chennai</p>
+                                        <span class="tour-date">Aug 15, 2025</span>
+                                    </div>
+                                    <div class="tour-status pending">Pending</div>
+                                </div>
+                                <div class="user-tour-item">
+                                    <div class="tour-info">
+                                        <h4>Training Program</h4>
+                                        <p>Pune → Hyderabad</p>
+                                        <span class="tour-date">Aug 20, 2025</span>
+                                    </div>
+                                    <div class="tour-status in-progress">In Progress</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="quick-actions">
+                                <button class="quick-action-btn btn-enhanced-tour">
+                                    <i class="fas fa-plus-circle"></i>
+                                    <span>New Application</span>
+                                </button>
+                                <button class="quick-action-btn" onclick="app.navigateTo('my-applications')">
+                                    <i class="fas fa-file-invoice"></i>
+                                    <span>My Applications</span>
+                                </button>
+                                <button class="quick-action-btn" onclick="app.navigateTo('my-tours')">
+                                    <i class="fas fa-route"></i>
+                                    <span>My Tours</span>
+                                </button>
+                                <button class="quick-action-btn" onclick="app.navigateTo('reports')">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>Reports</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="new-application" class="page">
+                <div class="page-header">
+                    <h1>New Tour Application / नया यात्रा आवेदन</h1>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="app.navigateTo('my-applications')">
+                            <i class="fas fa-arrow-left"></i> Back to Applications
+                        </button>
+                        <button class="btn btn-info" onclick="app.clearForm()">
+                            <i class="fas fa-refresh"></i> Clear Form
+                        </button>
+                    </div>
+                </div>
+
+                <div class="new-application-content">
+                    <form id="newApplicationForm">
+                        <!-- Personal Information Section -->
+                        <div class="form-section">
+                            <h4 class="section-title">Personal Information / व्यक्तिगत जानकारी</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name (पूरा नाम) *</label>
+                                    <input type="text" name="fullName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Employee ID (कर्मचारी आईडी) *</label>
+                                    <input type="text" name="employeeId" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mobile Number (मोबाइल नंबर) *</label>
+                                    <input type="tel" name="mobile" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email Address (ईमेल पता) *</label>
+                                    <input type="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>District Name (जिला) *</label>
+                                    <select id="districtDropdown" name="district_name" required>
+                                        <option value="">Select District</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ulbDropdown">ULB Name</label>
+                                    <select id="ulbDropdown" name="ulb_name_en" required>
+                                        <option value="">Select ULB</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Designation (पदनाम) *</label>
+                                    <input type="text" name="designation" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tour Details Section -->
+                        <div class="form-section">
+                            <h4 class="section-title">Tour Details (यात्रा विवरण)</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Tour Type (यात्रा प्रकार) *</label>
+                                    <select name="tourType" required>
+                                        <option value="">Select Tour Type</option>
+                                        <option value="official">Official Tour</option>
+                                        <option value="training">Training Program</option>
+                                        <option value="conference">Conference/Seminar</option>
+                                        <option value="meeting">Official Meeting</option>
+                                        <option value="inspection">Site Inspection</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Priority Level (प्राथमिकता) *</label>
+                                    <select name="priority" required>
+                                        <option value="">Select Priority</option>
+                                        <option value="urgent">Urgent</option>
+                                        <option value="high">High</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Travel Information -->
+                            <div class="travel-section">
+                                <h5>Travel Information (यात्रा जानकारी)</h5>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Origin Station (प्रस्थान स्थल) *</label>
+                                        <input type="text" name="originStation" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Destination Station (गंतव्य स्थल) *</label>
+                                        <input type="text" name="destinationStation" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Departure Date & Time (प्रस्थान दिनांक और समय) *</label>
+                                        <div class="datetime-group">
+                                            <input type="date" name="departureDate" required>
+                                            <input type="time" name="departureTime" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Arrival Date & Time (आगमन दिनांक और समय) *</label>
+                                        <div class="datetime-group">
+                                            <input type="date" name="arrivalDate" required>
+                                            <input type="time" name="arrivalTime" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Mode of Travel & Accommodation -->
+                            <div class="travel-mode-section">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Mode of Travel (यात्रा का साधन) *</label>
+                                        <select name="modeOfTravel" required>
+                                            <option value="">Select Mode</option>
+                                            <option value="train">Train (रेल)</option>
+                                            <option value="flight">Flight (विमान)</option>
+                                            <option value="bus">Bus (बस)</option>
+                                            <option value="car">Car (कार)</option>
+                                            <option value="taxi">Taxi (टैक्सी)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Class of Travel (यात्रा वर्ग) *</label>
+                                        <select name="classOfTravel" required>
+                                            <option value="">Select Class</option>
+                                            <option value="3ac">3rd AC</option>
+                                            <option value="2ac">2nd AC</option>
+                                            <option value="1ac">1st AC</option>
+                                            <option value="economy">Economy</option>
+                                            <option value="business">Business</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Accommodation Required (आवास आवश्यक) *</label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="accommodationRequired" value="yes"> Yes (हाँ)
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="accommodationRequired" value="no"> No (नहीं)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Advance Required (अग्रिम राशि)</label>
+                                        <input type="number" name="advanceAmount" placeholder="Enter amount in ₹">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Purpose and Documents Section -->
+                        <div class="form-section">
+                            <h4 class="section-title">Purpose & Documents (उद्देश्य और दस्तावेज़)</h4>
+                            <div class="form-group">
+                                <label>Purpose of Tour (यात्रा का उद्देश्य) *</label>
+                                <textarea name="tourPurpose" rows="4" placeholder="Describe the purpose of your tour in detail..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Supporting Documents (सहायक दस्तावेज़)</label>
+                                <div class="file-upload-area">
+                                    <input type="file" name="supportingDocs" multiple accept=".pdf,.doc,.docx,.jpg,.png" style="display: none;">
+                                    <div class="file-upload-text">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p>Click to upload or drag and drop files here</p>
+                                        <small>Supported formats: PDF, DOC, DOCX, JPG, PNG (Max 5MB each)</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Financial Details Section -->
+                        <div class="form-section">
+                            <h4 class="section-title">Financial Details (वित्तीय विवरण)</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Estimated Total Cost (अनुमानित कुल लागत)</label>
+                                    <input type="number" name="estimatedCost" placeholder="Enter amount in ₹" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Budget Head (बजट शीर्ष)</label>
+                                    <select name="budgetHead">
+                                        <option value="">Select Budget Head</option>
+                                        <option value="training">Training & Development</option>
+                                        <option value="official">Official Tours</option>
+                                        <option value="conference">Conference & Seminars</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="cost-breakdown">
+                                <h5>Cost Breakdown (लागत विवरण)</h5>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Travel Cost (यात्रा व्यय)</label>
+                                        <input type="number" name="travelCost" placeholder="₹">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Accommodation Cost (आवास व्यय)</label>
+                                        <input type="number" name="accommodationCost" placeholder="₹">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Miscellaneous Cost (विविध व्यय)</label>
+                                        <input type="number" name="miscCost" placeholder="₹">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Approval Section -->
+                        <div class="form-section">
+                            <h4 class="section-title">Approval Details (अनुमोदन विवरण)</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Reporting Officer (रिपोर्टिंग अधिकारी) *</label>
+                                    <input type="text" name="reportingOfficer" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Approving Authority (अनुमोदन प्राधिकारी) *</label>
+                                    <select name="approvingAuthority" required>
+                                        <option value="">Select Authority</option>
+                                        <option value="hod">Head of Department</option>
+                                        <option value="director">Director</option>
+                                        <option value="secretary">Secretary</option>
+                                        <option value="minister">Minister</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Declaration -->
+                        <div class="form-section">
+                            <h4 class="section-title">Declaration (घोषणा)</h4>
+                            <div class="declaration-text">
+                                <p>I hereby declare that the information provided above is true and correct to the best of my knowledge. I understand that any false information may result in the cancellation of my tour application.</p>
+                                <p>मैं घोषणा करता/करती हूँ कि ऊपर दी गई जानकारी मेरी जानकारी के अनुसार सत्य और सही है। मैं समझता/समझती हूँ कि किसी भी गलत जानकारी के कारण मेरा यात्रा आवेदन रद्द हो सकता है।</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="declaration" required>
+                                    I agree to the above declaration (मैं उपरोक्त घोषणा से सहमत हूँ)
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="app.navigateTo('my-applications')">
+                                <i class="fas fa-times"></i> Cancel (रद्द करें)
+                            </button>
+                            <button type="button" class="btn btn-warning" onclick="app.saveDraft()">
+                                <i class="fas fa-save"></i> Save as Draft (ड्राफ्ट सेव करें)
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-paper-plane"></i> Submit Application (आवेदन जमा करें)
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- My Applications Page (Merged from Pending Requests and My Applications) -->
+            <div id="my-applications" class="page">
+                <div class="page-header">
+                    <h1>My Applications</h1>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search applications..." id="applicationsSearch">
+                        </div>
+                        <div class="filter-dropdown">
+                            <select id="applicationStatusFilter">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="submitted">Submitted</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                                <option value="in-review">In Review</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-success btn-enhanced-tour">
+                            <i class="fas fa-plus"></i> New Application
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Application Status Summary -->
+                <div class="application-summary">
+                    <div class="summary-cards">
+                        <div class="summary-card pending">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3 id="pendingCount">3</h3>
+                                <p>Pending Applications</p>
+                            </div>
+                        </div>
+                        <div class="summary-card approved">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h3 id="approvedCount">8</h3>
+                                <p>Approved Applications</p>
+                            </div>
+                        </div>
+                        <div class="summary-card rejected">
+                            <i class="fas fa-times-circle"></i>
+                            <div>
+                                <h3 id="rejectedCount">2</h3>
+                                <p>Rejected Applications</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combined Applications Table -->
+                <div class="table-container">
+                    <div class="table-wrapper">
+                        <table class="data-table" id="myApplicationsTable">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Application ID</th>
+                                    <th>Type</th>
+                                    <th>Route</th>
+                                    <th>From Date</th>
+                                    <th>To Date</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Currently With</th>
+                                    <th>Submitted</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Tours Page (Renamed from Tour Status, filtered for approved tours) -->
+            <div id="my-tours" class="page">
+                <div class="page-header">
+                    <h1>My Tours</h1>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search tours..." id="myToursSearch">
+                        </div>
+                        <div class="filter-dropdown">
+                            <select id="tourTypeFilter">
+                                <option value="">All Tours</option>
+                                <option value="ongoing">Ongoing</option>
+                                <option value="upcoming">Upcoming</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary" onclick="app.refreshMyTours()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tour Status Summary -->
+                <div class="tour-summary">
+                    <div class="summary-cards">
+                        <div class="summary-card ongoing">
+                            <i class="fas fa-plane-departure"></i>
+                            <div>
+                                <h3 id="ongoingToursCount">1</h3>
+                                <p>Ongoing Tours</p>
+                            </div>
+                        </div>
+                        <div class="summary-card upcoming">
+                            <i class="fas fa-calendar-plus"></i>
+                            <div>
+                                <h3 id="upcomingToursCount">2</h3>
+                                <p>Upcoming Tours</p>
+                            </div>
+                        </div>
+                        <div class="summary-card completed">
+                            <i class="fas fa-check-double"></i>
+                            <div>
+                                <h3 id="completedToursCount">5</h3>
+                                <p>Completed Tours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-wrapper">
+                        <table class="data-table" id="myToursTable">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Request No</th>
+                                    <th>Route</th>
+                                    <th>From Date</th>
+                                    <th>To Date</th>
+                                    <th>Purpose</th>
+                                    <th>Tour Status</th>
+                                    <th>Travel Status</th>
+                                    <th>Reports</th>
+                                    <th>Tickets</th>
+				    <th>Tour Completion</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tours Management Page -->
+            <div id="tours" class="page">
+                <div class="page-header">
+                    <h1>Tour Management</h1>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search tours...">
+                        </div>
+                        <button class="btn btn-primary" id="addTourBtn">
+                            <i class="fas fa-plus"></i> Add Tour
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tours-grid">
+                    <div class="tour-card">
+                        <div class="tour-card-header">
+                            <div class="employee-info">
+                                <div class="employee-avatar">JD</div>
+                                <div>
+                                    <h3>John Doe</h3>
+                                    <p>Senior Sales Rep</p>
+                                </div>
+                            </div>
+                            <div class="tour-actions">
+                                <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="tour-card-body">
+                            <div class="route-info">
+                                <div class="location">
+                                    <i class="fas fa-map-marker-alt start"></i>
+                                    <span>New York, NY</span>
+                                </div>
+                                <div class="route-line"></div>
+                                <div class="location">
+                                    <i class="fas fa-map-marker-alt end"></i>
+                                    <span>Boston, MA</span>
+                                </div>
+                            </div>
+                            <div class="tour-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                                <span class="progress-text">65% Complete</span>
+                            </div>
+                            <div class="tour-meta">
+                                <div class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>2h 30m remaining</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-car"></i>
+                                    <span>Car</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tour-card-footer">
+                            <div class="tour-status active">Active</div>
+                            <button class="btn btn-secondary btn-sm">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Locations Page -->
+            <div id="locations" class="page">
+                <div class="page-header">
+                    <h1>Real-time Locations</h1>
+                    <div class="header-actions">
+                        <div class="view-controls">
+                            <button class="btn btn-secondary active" data-view="map">
+                                <i class="fas fa-map"></i> Map View
+                            </button>
+                            <button class="btn btn-secondary" data-view="list">
+                                <i class="fas fa-list"></i> List View
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="locations-content">
+                    <div class="map-container-full">
+                        <div id="locations-map" class="map-placeholder">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <p>Full Screen Map View</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Page -->
+            <div id="reports" class="page">
+                <div class="page-header">
+                    <h1>Reports & Analytics</h1>
+                    <div class="header-actions">
+                        <div class="date-range">
+                            <input type="date" id="startDate">
+                            <span>to</span>
+                            <input type="date" id="endDate">
+                        </div>
+                        <button class="btn btn-primary" id="generateReportBtn">
+                            <i class="fas fa-file-alt"></i> Generate Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="card-header">
+                            <h3>Distance Analytics</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-bar"></i>
+                                <p>Distance Chart</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <div class="card-header">
+                            <h3>Time Analytics</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Time Chart</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="export-section">
+                    <h3>Export Options</h3>
+                    <div class="export-buttons">
+                        <button class="btn btn-secondary" data-format="pdf">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </button>
+                        <button class="btn btn-secondary" data-format="excel">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </button>
+                        <button class="btn btn-secondary" data-format="csv">
+                            <i class="fas fa-file-csv"></i> Export CSV
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts Page -->
+            <div id="alerts" class="page">
+                <div class="page-header">
+                    <h1>Alerts & Notifications</h1>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" id="markAllReadBtn">
+                            <i class="fas fa-check-double"></i> Mark All Read
+                        </button>
+                    </div>
+                </div>
+
+                <div class="alerts-container">
+                    <div class="alert-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="critical">Critical</button>
+                        <button class="filter-btn" data-filter="warning">Warning</button>
+                        <button class="filter-btn" data-filter="info">Info</button>
+                    </div>
+
+                    <div class="alerts-list">
+                        <div class="alert-card critical">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>Critical: Employee Emergency</h4>
+                                <p>John Doe has triggered an emergency alert from his current location.</p>
+                                <div class="alert-meta">
+                                    <span class="alert-time">5 minutes ago</span>
+                                    <span class="alert-location">Times Square, NYC</span>
+                                </div>
+                            </div>
+                            <div class="alert-actions">
+                                <button class="btn btn-danger btn-sm">Respond</button>
+                                <button class="btn btn-secondary btn-sm">Acknowledge</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-card warning">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>Warning: Geofence Violation</h4>
+                                <p>Sarah Miller has left the designated work area without authorization.</p>
+                                <div class="alert-meta">
+                                    <span class="alert-time">12 minutes ago</span>
+                                    <span class="alert-location">Downtown LA</span>
+                                </div>
+                            </div>
+                            <div class="alert-actions">
+                                <button class="btn btn-warning btn-sm">Contact</button>
+                                <button class="btn btn-secondary btn-sm">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Management Page -->
+            <div id="users" class="page">
+                <div class="page-header">
+                    <h1>User Management</h1>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search users...">
+                        </div>
+                        <button class="btn btn-primary" id="addUserBtn">
+                            <i class="fas fa-user-plus"></i> Add User
+                        </button>
+                    </div>
+                </div>
+
+                <div class="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Role</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Last Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="user-avatar">JD</div>
+                                        <div>
+                                            <h4>John Doe</h4>
+                                            <p>john.doe@company.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="role-badge admin">Admin</span></td>
+                                <td>Sales</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>2 minutes ago</td>
+                                <td>
+                                    <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settings" class="page">
+                <div class="page-header">
+                    <h1>Settings & Configuration</h1>
+                </div>
+
+                <div class="settings-container">
+                    <div class="settings-sidebar">
+                        <ul class="settings-nav">
+                            <li class="active" data-setting="general">General</li>
+                            <li data-setting="tracking">Tracking</li>
+                            <li data-setting="geofence">Geofencing</li>
+                            <li data-setting="notifications">Notifications</li>
+                        </ul>
+                    </div>
+
+                    <div class="settings-content">
+                        <div id="general-settings" class="setting-panel active">
+                            <h3>General Settings</h3>
+                            <div class="setting-group">
+                                <label>Company Name</label>
+                                <input type="text" value="Tour Management System">
+                            </div>
+                            <div class="setting-group">
+                                <label>Time Zone</label>
+                                <select>
+                                    <option>Indian Standard Time (IST)</option>
+                                    <option>Eastern Time (ET)</option>
+                                    <option>Central Time (CT)</option>
+                                    <option>Mountain Time (MT)</option>
+                                    <option>Pacific Time (PT)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="tracking-settings" class="setting-panel">
+                            <h3>Tracking Configuration</h3>
+                            <div class="setting-group">
+                                <label>Location Update Frequency</label>
+                                <div class="slider-container">
+                                    <input type="range" id="updateFrequency" min="30" max="300" value="60">
+                                    <span class="slider-value">60 seconds</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="geofence-settings" class="setting-panel">
+                            <h3>Geofencing Configuration</h3>
+                            <div class="geofence-map-container">
+                                <div id="geofence-map" class="map-placeholder">
+                                    <i class="fas fa-map"></i>
+                                    <p>Geofence Map</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="notifications-settings" class="setting-panel">
+                            <h3>Notification Settings</h3>
+                            <div class="setting-group">
+                                <label>Email Notifications</label>
+                                <input type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approval Queue Page (Admin Only) -->
+            <div id="approval-queue" class="page">
+                <div class="page-header">
+                    <h1>Approval Queue</h1>
+                    <div class="header-actions">
+                        <div class="filter-dropdown">
+                            <select id="approvalFilter">
+                                <option value="">All Applications</option>
+                                <option value="pending">Pending Approval</option>
+                                <option value="urgent">Urgent Priority</option>
+                                <option value="high">High Priority</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="approval-queue-container" id="approvalQueueContainer">
+                    <!-- Approval items will be populated by JavaScript -->
+                </div>
+		<div id="tour-completion-verification" class="page admin-only">
+    <div class="page-header">
+        <h1>Tour Completion Verification</h1>
+        <div class="header-actions">
+            <div class="filter-dropdown">
+                <select id="completionFilter">
+                    <option value="">All Submissions</option>
+                    <option value="pending">Pending Verification</option>
+                    <option value="verified">Verified</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+            <button class="btn btn-secondary" onclick="app.refreshCompletionQueue()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+    </div>
+
+    <div id="completionVerificationContainer" class="completion-queue-container">
+        <!-- Completion verification items will be populated by JavaScript -->
+    </div>
+</div>
+
+<!-- Add Tour Completion Verification to sidebar navigation -->
+<li class="nav-item admin-only" data-page="tour-completion-verification">
+    <a href="#"><i class="fas fa-camera"></i> Tour Verification</a>
+</li>
+            </div>
+        </main>
+    </div>
+
+    <!-- Enhanced Tour Application Modal -->
+    <div id="enhancedTourModal" class="modal">
+        <div class="modal-content extra-large-modal">
+            <div class="modal-header official-header-style">
+                <h3>Online Tour Application / ऑनलाइन यात्रा आवेदन</h3>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="enhancedTourForm">
+                    <!-- Personal Information Section -->
+                    <div class="form-section">
+                        <h4 class="section-title">Personal Information / व्यक्तिगत जानकारी</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name (पूरा नाम) *</label>
+                                <input type="text" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Employee ID (कर्मचारी आईडी) *</label>
+                                <input type="text" name="employeeId" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile Number (मोबाइल नंबर) *</label>
+                                <input type="tel" name="mobile" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email Address (ईमेल पता) *</label>
+                                <input type="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Department (विभाग) *</label>
+                                <select name="department" required>
+                                    <option value="">Select Department</option>
+                                    <option value="it">Information Technology</option>
+                                    <option value="admin">Administration</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="operations">Operations</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Designation (पदनाम) *</label>
+                                <input type="text" name="designation" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tour Details Section -->
+                    <div class="form-section">
+                        <h4 class="section-title">Tour Details (यात्रा विवरण)</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Tour Type (यात्रा प्रकार) *</label>
+                                <select name="tourType" required>
+                                    <option value="">Select Tour Type</option>
+                                    <option value="official">Official Tour</option>
+                                    <option value="training">Training Program</option>
+                                    <option value="conference">Conference/Seminar</option>
+                                    <option value="meeting">Official Meeting</option>
+                                    <option value="inspection">Site Inspection</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Priority Level (प्राथमिकता) *</label>
+                                <select name="priority" required>
+                                    <option value="">Select Priority</option>
+                                    <option value="urgent">Urgent</option>
+                                    <option value="high">High</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Travel Information -->
+                        <div class="travel-section">
+                            <h5>Travel Information (यात्रा जानकारी)</h5>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Origin Station (प्रस्थान स्थल) *</label>
+                                    <input type="text" name="originStation" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Destination Station (गंतव्य स्थल) *</label>
+                                    <input type="text" name="destinationStation" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Departure Date & Time (प्रस्थान दिनांक और समय) *</label>
+                                    <div class="datetime-group">
+                                        <input type="date" name="departureDate" required>
+                                        <input type="time" name="departureTime" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Arrival Date & Time (आगमन दिनांक और समय) *</label>
+                                    <div class="datetime-group">
+                                        <input type="date" name="arrivalDate" required>
+                                        <input type="time" name="arrivalTime" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mode of Travel & Accommodation -->
+                        <div class="travel-mode-section">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Mode of Travel (यात्रा का साधन) *</label>
+                                    <select name="modeOfTravel" required>
+                                        <option value="">Select Mode</option>
+                                        <option value="train">Train (रेल)</option>
+                                        <option value="flight">Flight (विमान)</option>
+                                        <option value="bus">Bus (बस)</option>
+                                        <option value="car">Car (कार)</option>
+                                        <option value="taxi">Taxi (टैक्सी)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Class of Travel (यात्रा वर्ग) *</label>
+                                    <select name="classOfTravel" required>
+                                        <option value="">Select Class</option>
+                                        <option value="3ac">3rd AC</option>
+                                        <option value="2ac">2nd AC</option>
+                                        <option value="1ac">1st AC</option>
+                                        <option value="economy">Economy</option>
+                                        <option value="business">Business</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Accommodation Required (आवास आवश्यक) *</label>
+                                    <div class="radio-group">
+                                        <label class="radio-label">
+                                            <input type="radio" name="accommodationRequired" value="yes"> Yes (हाँ)
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="accommodationRequired" value="no"> No (नहीं)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Advance Required (अग्रिम राशि)</label>
+                                    <input type="number" name="advanceAmount" placeholder="Enter amount in ₹">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Purpose and Documents Section -->
+                    <div class="form-section">
+                        <h4 class="section-title">Purpose & Documents (उद्देश्य और दस्तावेज़)</h4>
+                        <div class="form-group">
+                            <label>Purpose of Tour (यात्रा का उद्देश्य) *</label>
+                            <textarea name="tourPurpose" rows="4" placeholder="Describe the purpose of your tour in detail..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Supporting Documents (सहायक दस्तावेज़)</label>
+                            <div class="file-upload-area">
+                                <input type="file" name="supportingDocs" multiple accept=".pdf,.doc,.docx,.jpg,.png" style="display: none;">
+                                <div class="file-upload-text">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Click to upload or drag and drop files here</p>
+                                    <small>Supported formats: PDF, DOC, DOCX, JPG, PNG (Max 5MB each)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Details Section -->
+                    <div class="form-section">
+                        <h4 class="section-title">Financial Details (वित्तीय विवरण)</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Estimated Total Cost (अनुमानित कुल लागत)</label>
+                                <input type="number" name="estimatedCost" placeholder="Enter amount in ₹" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Budget Head (बजट शीर्ष)</label>
+                                <select name="budgetHead">
+                                    <option value="">Select Budget Head</option>
+                                    <option value="training">Training & Development</option>
+                                    <option value="official">Official Tours</option>
+                                    <option value="conference">Conference & Seminars</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="cost-breakdown">
+                            <h5>Cost Breakdown (लागत विवरण)</h5>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Travel Cost (यात्रा व्यय)</label>
+                                    <input type="number" name="travelCost" placeholder="₹">
+                                </div>
+                                <div class="form-group">
+                                    <label>Accommodation Cost (आवास व्यय)</label>
+                                    <input type="number" name="accommodationCost" placeholder="₹">
+                                </div>
+                                <div class="form-group">
+                                    <label>Miscellaneous Cost (विविध व्यय)</label>
+                                    <input type="number" name="miscCost" placeholder="₹">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Approval Section -->
+                    <div class="form-section">
+                        <h4 class="section-title">Approval Details (अनुमोदन विवरण)</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Reporting Officer (रिपोर्टिंग अधिकारी) *</label>
+                                <input type="text" name="reportingOfficer" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Approving Authority (अनुमोदन प्राधिकारी) *</label>
+                                <select name="approvingAuthority" required>
+                                    <option value="">Select Authority</option>
+                                    <option value="hod">Head of Department</option>
+                                    <option value="director">Director</option>
+                                    <option value="secretary">Secretary</option>
+                                    <option value="minister">Minister</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Declaration -->
+                    <div class="form-section">
+                        <h4 class="section-title">Declaration (घोषणा)</h4>
+                        <div class="declaration-text">
+                            <p>I hereby declare that the information provided above is true and correct to the best of my knowledge. I understand that any false information may result in the cancellation of my tour application.</p>
+                            <p>मैं घोषणा करता/करती हूँ कि ऊपर दी गई जानकारी मेरी जानकारी के अनुसार सत्य और सही है। मैं समझता/समझती हूँ कि किसी भी गलत जानकारी के कारण मेरा यात्रा आवेदन रद्द हो सकता है।</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="declaration" required>
+                                I agree to the above declaration (मैं उपरोक्त घोषणा से सहमत हूँ)
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close">Cancel (रद्द करें)</button>
+                <button class="btn btn-success" id="submitEnhancedTourBtn">
+                    <i class="fas fa-paper-plane"></i> Submit Application (आवेदन जमा करें)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple Tour Request Modal -->
+    <div id="createTourModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Tour</h3>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createTourForm">
+                    <div class="form-group">
+                        <label>Employee</label>
+                        <select name="employee" required>
+                            <option value="">Select Employee</option>
+                            <option value="john-doe">John Doe</option>
+                            <option value="sarah-miller">Sarah Miller</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Start Location</label>
+                            <input type="text" name="startLocation" placeholder="Enter start location" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Destination</label>
+                            <input type="text" name="destination" placeholder="Enter destination" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Time</label>
+                            <input type="time" name="time" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Travel Mode</label>
+                        <select name="travelMode" required>
+                            <option value="">Select Mode</option>
+                            <option value="car">Car</option>
+                            <option value="plane">Plane</option>
+                            <option value="train">Train</option>
+                            <option value="bus">Bus</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close">Cancel</button>
+                <button class="btn btn-primary" id="saveTourBtn">Create Tour</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Request Modal -->
+    <div id="newRequestModal" class="modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3>Quick Tour Request</h3>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="newRequestForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Employee Name</label>
+                            <input type="text" name="employeeName" value="John Doe" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Employee Code</label>
+                            <input type="text" name="employeeCode" value="EMP001" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Designation</label>
+                            <input type="text" name="designation" value="Sales Manager" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <input type="text" name="department" value="Sales" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Origin</label>
+                            <input type="text" name="origin" placeholder="Enter origin city" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Destination</label>
+                            <input type="text" name="destination" placeholder="Enter destination city" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>From Date</label>
+                            <input type="date" name="fromDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>To Date</label>
+                            <input type="date" name="toDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Advance Required</label>
+                            <input type="number" name="advanceRequired" placeholder="Enter amount in ₹" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Ticket Arranged By</label>
+                            <select name="ticketArrangedBy" required>
+                                <option value="">Select Option</option>
+                                <option value="self">Self</option>
+                                <option value="company">Company</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Purpose of Tour</label>
+                        <textarea name="purposeOfTour" rows="3" placeholder="Describe the purpose of your tour" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Notes</label>
+                        <textarea name="additionalNotes" rows="2" placeholder="Any additional information"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close">Cancel</button>
+                <button class="btn btn-primary" id="submitRequestBtn">Submit Request</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
