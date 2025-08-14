@@ -1,4 +1,3 @@
-// approvalQueue.js
 import { fetchApplications, updateApplicationStatus } from './api.js';
 import { showNotification } from './notifications.js';
 
@@ -8,7 +7,7 @@ export async function loadAndRenderApprovalQueue(appInstance) {
     const pending = apps.filter(a => a.status === 'pending');
     renderApprovalQueue(pending);
   } catch (err) {
-    showNotification(`Error loading approval queue: ${err.message}`, 'error');
+    showNotification(`Error: ${err.message}`, 'error');
   }
 }
 
@@ -20,28 +19,31 @@ export function renderApprovalQueue(pendingApps) {
     container.innerHTML = `<div class="empty-state">
       <i class="fas fa-check-circle"></i>
       <h3>No Pending Applications</h3>
-      <p>All applications have been processed.</p>
     </div>`;
     return;
   }
 
-  container.innerHTML = pendingApps.map(app => `
+  container.innerHTML = pendingApps
+    .map(
+      app => `
     <div class="approval-item">
       <div class="approval-header">
-        <h4>${app.applicationId} — ${app.type}</h4>
+        <h4>${app.application_id} — ${app.type}</h4>
         <span>${app.origin} → ${app.destination}</span>
       </div>
       <div class="approval-body">
         <p>${app.purpose}</p>
         <p><strong>Priority:</strong> ${app.priority}</p>
-        <p><strong>Submitted:</strong> ${app.submittedDate}</p>
+        <p><strong>Submitted:</strong> ${app.submitted_date}</p>
       </div>
       <div class="approval-actions">
-        <button class="btn btn-success approve-btn" data-app-id="${app.id}">Approve</button>
-        <button class="btn btn-danger reject-btn" data-app-id="${app.id}">Reject</button>
+        <button class="btn btn-success queue-approve-btn" data-app-id="${app.id}">Approve</button>
+        <button class="btn btn-danger queue-reject-btn" data-app-id="${app.id}">Reject</button>
       </div>
     </div>
-  `).join('');
+  `
+    )
+    .join('');
 }
 
 export async function approveFromQueue(appInstance, id) {

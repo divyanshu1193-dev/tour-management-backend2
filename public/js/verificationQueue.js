@@ -1,4 +1,3 @@
-// verificationQueue.js
 import { fetchTours, verifyTourCompletion } from './api.js';
 import { showNotification } from './notifications.js';
 
@@ -8,7 +7,7 @@ export async function loadAndRenderVerificationQueue(appInstance) {
     const pending = tours.filter(t => t.verification_status === 'pending');
     renderVerificationQueue(pending);
   } catch (err) {
-    showNotification(`Error loading verification queue: ${err.message}`, 'error');
+    showNotification(`Error: ${err.message}`, 'error');
   }
 }
 
@@ -24,10 +23,12 @@ export function renderVerificationQueue(tours) {
     return;
   }
 
-  container.innerHTML = tours.map(t => `
+  container.innerHTML = tours
+    .map(
+      t => `
     <div class="completion-verification-item pending">
       <div class="completion-header">
-        <h4>${t.requestNo}</h4>
+        <h4>${t.request_no}</h4>
         <span>${t.origin} → ${t.destination}</span>
       </div>
       <div class="completion-body">
@@ -38,14 +39,16 @@ export function renderVerificationQueue(tours) {
         <button class="btn btn-danger verify-tour-btn" data-tour-id="${t.id}" data-status="rejected">Reject</button>
       </div>
     </div>
-  `).join('');
+  `
+    )
+    .join('');
 }
 
-export async function handleTourVerification(id, status) {
+export async function handleVerification(tourId, status) {
   const comments = prompt(`Comments for ${status}:`);
   try {
-    await verifyTourCompletion(id, status, comments);
-    showNotification(`Tour ${status}`, 'success');
+    await verifyTourCompletion(tourId, status, comments);
+    showNotification(`Tour marked as ${status}`, 'success');
   } catch (err) {
     showNotification(err.message, 'error');
   }

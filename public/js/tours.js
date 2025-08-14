@@ -1,7 +1,3 @@
-/**
- * tours.js
- * Rendering and handling logic for tours and completion verification.
- */
 import { fetchTours, submitTourCompletion, verifyTourCompletion } from './api.js';
 import { showNotification } from './notifications.js';
 
@@ -9,17 +5,24 @@ export async function loadAndRenderMyTours(appInstance) {
   try {
     const empId = appInstance.loggedInUser?.employee_id || '';
     appInstance.approvedTours = await fetchTours(empId);
-    renderMyTours(appInstance.approvedTours);
+    renderMyTours(appInstance);
   } catch (err) {
     showNotification(err.message, 'error');
   }
 }
 
-export function renderMyTours(tours) {
-  const tbody = document.querySelector('#myToursTable tbody');
-  if (!tbody) return;
-  tbody.innerHTML = tours.map(tour => `
+export function renderMyTours(appInstance) {
+  const tableBody = document.querySelector('#myToursTable tbody');
+  if (!tableBody) return;
+
+  if (!appInstance.approvedTours.length) {
+    tableBody.innerHTML = `<tr><td colspan="12">No tours found</td></tr>`;
+    return;
+  }
+
+  tableBody.innerHTML = appInstance.approvedTours.map((tour, index) => `
     <tr>
+      <td>${index + 1}</td>
       <td>${tour.requestNo}</td>
       <td>${tour.origin} → ${tour.destination}</td>
       <td>${tour.fromDate}</td>
@@ -27,9 +30,13 @@ export function renderMyTours(tours) {
       <td>${tour.purpose}</td>
       <td><span class="tour-status-badge ${tour.tourStatus}">${tour.tourStatus}</span></td>
       <td><span class="travel-status-badge ${tour.travelStatus}">${tour.travelStatus}</span></td>
+      <td>-</td>
+      <td>-</td>
       <td>
-        <button class="btn btn-info" data-tour-id="${tour.id}">Complete</button>
+        ${tour.tourStatus === 'completed' ? 
+          `<button class="btn btn-info complete-tour-btn" data-tour-id="${tour.id}">Upload Completion</button>` : '-'}
       </td>
+      <td>-</td>
     </tr>
   `).join('');
 }

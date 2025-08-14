@@ -1,4 +1,3 @@
-// dashboard.js
 import { fetchStats } from './api.js';
 import { showNotification } from './notifications.js';
 
@@ -18,5 +17,9 @@ export function renderDashboard(stats) {
   const completedTours = document.getElementById('completedToursCount');
   if (completedTours) completedTours.textContent = stats.completedTours || 0;
 
-  // Example: you could generate more detailed dashboard cards here
+  const alertsCount = document.getElementById('alertsCount');
+  if (alertsCount) alertsCount.textContent = stats.alerts || 0;
+
+  const employeesCount = document.getElementById('employeesCount');
+  if (employeesCount) employeesCount.textContent = stats.activeEmployees || 0;
 }

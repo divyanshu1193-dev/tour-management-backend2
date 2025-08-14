@@ -1,4 +1,3 @@
-// alerts.js
 import { fetchAlerts } from './api.js';
 import { showNotification } from './notifications.js';
 
@@ -12,17 +11,22 @@ export async function loadAndRenderAlerts(appInstance) {
 }
 
 export function renderAlerts(alerts) {
-  const list = document.querySelector('.alerts-list');
-  if (!list) return;
-  list.innerHTML = alerts.map(a => `
+  const container = document.querySelector('.alerts-list');
+  if (!container) return;
+  container.innerHTML = alerts
+    .map(
+      a => `
     <div class="alert-card ${a.type}">
       <div class="alert-icon"><i class="${a.icon}"></i></div>
       <div class="alert-content">
-        <h4>${a.title}</h4><p>${a.message}</p>
+        <h4>${a.title}</h4>
+        <p>${a.message}</p>
         <div class="alert-meta">${a.date}</div>
       </div>
     </div>
-  `).join('');
+  `
+    )
+    .join('');
 }
 
 export function filterAlertsUI(type) {

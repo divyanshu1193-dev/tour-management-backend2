@@ -1,12 +1,11 @@
 /**
- * TourManager.js
- * Final orchestration class – coordinates app state and delegates to feature modules.
+ * TourManager.js – Final orchestrator (app.js refactored)
+ * Holds global state, handles page navigation & delegates to modules.
  */
 
-// Notifications & popups
 import { showNotification } from './notifications.js';
 
-// Page modules
+// Feature modules for loading and rendering
 import { loadAndRenderMyApplications, handleApprove, handleReject } from './applications.js';
 import { loadAndRenderMyTours, handleCompletionSubmit, handleVerification } from './tours.js';
 import { loadAndRenderApprovalQueue, approveFromQueue, rejectFromQueue } from './approvalQueue.js';
@@ -16,12 +15,10 @@ import { loadAndRenderAlerts, filterAlertsUI, markAllAlertsRead } from './alerts
 import { loadAndRenderUsers } from './users.js';
 import { renderReportsPlaceholder } from './reports.js';
 
-// UI/Forms/Settings
+// Forms, settings, modals, utils
 import { setupNewApplicationPage } from './forms.js';
 import { changeSettingPanel, initUpdateFrequencySlider } from './settings.js';
 import { openModal, closeAllModals } from './modals.js';
-
-// Utilities
 import { setupTableSearch, exportData } from './utils.js';
 
 export class TourManager {
@@ -31,7 +28,7 @@ export class TourManager {
     this.userName = '';
     this.loggedInUser = null;
 
-    // State for loaded data
+    // Data state
     this.allApplications = [];
     this.approvedTours = [];
     this.alerts = [];
@@ -42,39 +39,45 @@ export class TourManager {
   }
 
   /**
-   * Initialises event handlers and loads default dashboard data.
+   * Startup
    */
   init() {
     this.setupGlobalEventListeners();
-    this.navigateTo('dashboard');
   }
 
   /**
-   * Called after login by auth.js
+   * Called by auth.js after successful login
    */
   setUserRole(role, name) {
     this.userRole = role;
     this.userName = name;
+
+    // Apply role-based body class for UI visibility rules
+    document.body.classList.add(`${role}-role`);
+
+    // Update name in header
     const uname = document.getElementById('officialUserName');
     if (uname) uname.textContent = this.userName;
+
+    // Show correct dashboard
     this.navigateTo(role === 'user' ? 'user-dashboard' : 'dashboard');
   }
 
   /**
-   * Navigation: switch active page, trigger page-specific module.
+   * Navigation + page-specific module calls
    */
   navigateTo(page) {
-    // Update nav active styling
+    // Update active nav item
     document.querySelectorAll('.nav-item.active').forEach(n => n.classList.remove('active'));
     document.querySelector(`.nav-item[data-page="${page}"]`)?.classList.add('active');
 
-    // Update active page content
+    // Show page
     document.querySelectorAll('.page.active').forEach(p => p.classList.remove('active'));
     document.getElementById(page)?.classList.add('active');
 
     this.currentPage = page;
 
-    // Page-specific data/render calls
+    // Load content based on page
     switch (page) {
       case 'my-applications':
         loadAndRenderMyApplications(this);
@@ -108,10 +111,10 @@ export class TourManager {
   }
 
   /**
-   * Sets up all application-wide event handlers.
+   * Global event listeners from original app.js
    */
   setupGlobalEventListeners() {
-    // Navigation clicks
+    // Navigation
     document.querySelectorAll('.nav-item').forEach(item => {
       item.addEventListener('click', e => {
         e.preventDefault();
@@ -119,24 +122,33 @@ export class TourManager {
       });
     });
 
+    // Logout
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', e => {
+        e.preventDefault();
+        this.logout();
+      });
+    }
+
     // Modal close
     document.querySelectorAll('.modal-close, .btn-close').forEach(btn =>
       btn.addEventListener('click', closeAllModals)
     );
 
-    // Approve/Reject in Applications
+    // Approve/Reject – My Applications
     document.addEventListener('click', e => {
       if (e.target.matches('.approve-btn')) handleApprove(this, e.target.dataset.appId);
       if (e.target.matches('.reject-btn')) handleReject(this, e.target.dataset.appId);
     });
 
-    // Approve/Reject in Approval Queue
+    // Approve/Reject – Approval Queue
     document.addEventListener('click', e => {
       if (e.target.matches('.queue-approve-btn')) approveFromQueue(this, e.target.dataset.appId);
       if (e.target.matches('.queue-reject-btn')) rejectFromQueue(this, e.target.dataset.appId);
     });
 
-    // Tour completion / verification
+    // Completion / Verification
     document.addEventListener('click', e => {
       if (e.target.matches('.complete-tour-btn')) {
         handleCompletionSubmit(e.target.dataset.tourId, document.getElementById('completionForm'));
@@ -146,7 +158,7 @@ export class TourManager {
       }
     });
 
-    // Alert filters
+    // Alerts filter
     document.querySelectorAll('.filter-btn').forEach(btn =>
       btn.addEventListener('click', () => filterAlertsUI(btn.dataset.filter))
     );
@@ -154,20 +166,34 @@ export class TourManager {
     // Mark all alerts read
     document.getElementById('markAllReadBtn')?.addEventListener('click', markAllAlertsRead);
 
-    // Settings panel switches
-    document.querySelectorAll('.settings-nav li').forEach(li => {
-      li.addEventListener('click', () => changeSettingPanel(li.dataset.setting));
-    });
+    // Settings nav
+    document.querySelectorAll('.settings-nav li').forEach(li =>
+      li.addEventListener('click', () => changeSettingPanel(li.dataset.setting))
+    );
 
-    // Export buttons
+    // Export
     document.querySelectorAll('.export-buttons .btn').forEach(btn =>
       btn.addEventListener('click', () => exportData(btn.dataset.format, btn.dataset.table))
     );
 
-    // Table search (example for My Applications)
+    // Search (example – My Applications)
     setupTableSearch('#myApplicationsTable', '#searchApplications');
 
-    // Init update frequency slider (settings)
+    // Init settings slider
     initUpdateFrequencySlider();
+  }
+
+  /**
+   * Logout handling – matches app.js behaviour
+   */
+  logout() {
+    // Reset app state
+    this.userRole = null;
+    this.userName = '';
+    this.loggedInUser = null;
+    document.body.classList.remove('admin-role', 'user-role', 'app-visible');
+
+    // Refresh / show login page
+    location.reload();
   }
 }

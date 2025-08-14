@@ -1,39 +1,42 @@
-/**
- * applications.js
- * Rendering and handling logic for "My Applications" and approval/rejection.
- */
-import { fetchApplications, submitApplication, updateApplicationStatus } from './api.js';
+import { fetchApplications, updateApplicationStatus } from './api.js';
 import { showNotification } from './notifications.js';
 
 export async function loadAndRenderMyApplications(appInstance) {
   try {
     const empId = appInstance.loggedInUser?.employee_id || '';
     appInstance.allApplications = await fetchApplications(empId);
-    renderMyApplications(appInstance.allApplications);
+    renderMyApplications(appInstance);
   } catch (err) {
     showNotification(err.message, 'error');
   }
 }
 
-export function renderMyApplications(applications) {
-  const tbody = document.querySelector('#myApplicationsTable tbody');
-  if (!tbody) return;
-  tbody.innerHTML = applications.map(app => `
+export function renderMyApplications(appInstance) {
+  const tableBody = document.querySelector('#myApplicationsTable tbody');
+  if (!tableBody) return;
+
+  if (!appInstance.allApplications.length) {
+    tableBody.innerHTML = `<tr><td colspan="11">No applications found</td></tr>`;
+    return;
+  }
+
+  tableBody.innerHTML = appInstance.allApplications.map((application, index) => `
     <tr>
-      <td>${app.applicationId}</td>
-      <td>${app.type}</td>
-      <td>${app.origin} → ${app.destination}</td>
-      <td>${app.fromDate}</td>
-      <td>${app.toDate}</td>
-      <td>${app.priority}</td>
-      <td><span class="status-badge ${app.status}">${app.status}</span></td>
-      <td>${app.currentlyWith}</td>
-      <td>${app.submittedDate || '-'}</td>
+      <td>${index + 1}</td>
+      <td>${application.applicationId}</td>
+      <td>${application.type}</td>
+      <td>${application.origin} → ${application.destination}</td>
+      <td>${application.fromDate}</td>
+      <td>${application.toDate}</td>
+      <td>${application.priority}</td>
+      <td><span class="status-badge ${application.status}">${application.status}</span></td>
+      <td>${application.currentlyWith}</td>
+      <td>${application.submittedDate || '-'}</td>
       <td>
-        ${app.status === 'pending' ? `
-          <button class="btn btn-success approve-btn" data-app-id="${app.id}">Approve</button>
-          <button class="btn btn-danger reject-btn" data-app-id="${app.id}">Reject</button>
-        ` : ''}
+        ${application.status === 'pending'
+          ? `<button class="btn btn-success approve-btn" data-app-id="${application.id}">Approve</button>
+             <button class="btn btn-danger reject-btn" data-app-id="${application.id}">Reject</button>`
+          : '-'}
       </td>
     </tr>
   `).join('');
@@ -43,7 +46,7 @@ export async function handleApprove(appInstance, appId) {
   try {
     await updateApplicationStatus(appId, 'approved', 'Approved by admin', appInstance.userId || 1);
     showNotification('Application approved', 'success');
-    await loadAndRenderMyApplications(appInstance);
+    loadAndRenderMyApplications(appInstance);
   } catch (err) {
     showNotification(err.message, 'error');
   }
@@ -55,7 +58,7 @@ export async function handleReject(appInstance, appId) {
   try {
     await updateApplicationStatus(appId, 'rejected', reason);
     showNotification('Application rejected', 'warning');
-    await loadAndRenderMyApplications(appInstance);
+    loadAndRenderMyApplications(appInstance);
   } catch (err) {
     showNotification(err.message, 'error');
   }
