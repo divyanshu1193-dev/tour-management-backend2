@@ -43,6 +43,35 @@ export function exportData(format, tableSelector) {
   document.body.removeChild(link);
 }
 
+export function formatDateTime(dateTimeString) {
+    if (!dateTimeString) return '-';
+    const date = new Date(dateTimeString);
+    return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+export function getDayOfWeek(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+        weekday: 'long'
+    });
+}
+
+export function getStatusIcon(status) {
+    const icons = {
+        'approved': 'check-circle',
+        'pending': 'hourglass-half',
+        'submitted': 'paper-plane',
+        'rejected': 'ban',
+        'in-review': 'eye'
+    };
+    return icons[status] || 'question-circle';
+}
 
 export function setupCostCalculator() {
   const inputs = document.querySelectorAll('[data-cost-part]');
@@ -81,4 +110,56 @@ export function setupFileUpload() {
       }
     });
   });
+}
+
+export function renderCompletionCell(tour, formatDateTime) {
+    switch (tour.completionStatus) {
+        case 'not-uploaded':
+            if (tour.tourStatus === 'completed' || tour.travelStatus === 'completed') {
+                return `
+                    <div class="completion-upload-section">
+                        <button class="btn btn-primary btn-sm upload-completion-btn" data-tour-id="${tour.id}">
+                            <i class="fas fa-camera"></i> Upload Image
+                            <input type="file" accept="image/*" style="display: none;">
+                        </button>
+                        <br><small class="text-muted">Upload geo-tagged image</small>
+                    </div>
+                `;
+            } else {
+                return `<span class="completion-status-badge not-uploaded">Complete tour first</span>`;
+            }
+        case 'pending':
+            return `
+                <div class="completion-pending-section">
+                    <span class="completion-status-badge pending">
+                        <i class="fas fa-clock"></i> Pending Verification
+                    </span>
+                    <br><small class="text-info">Image submitted: ${formatDateTime(tour.submittedAt)}</small>
+                </div>
+            `;
+        case 'verified':
+            return `
+                <div class="completion-verified-section">
+                    <span class="completion-status-badge verified">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </span>
+                    <br><small class="text-success">Tour completion verified</small>
+                </div>
+            `;
+        case 'rejected':
+            return `
+                <div class="completion-rejected-section">
+                    <span class="completion-status-badge rejected">
+                        <i class="fas fa-times-circle"></i> Not Verified
+                    </span>
+                    <br>
+                    <button class="btn btn-primary btn-sm upload-completion-btn" data-tour-id="${tour.id}">
+                        <i class="fas fa-camera"></i> Re-upload
+                        <input type="file" accept="image/*" style="display: none;">
+                    </button>
+                </div>
+            `;
+        default:
+            return `<span class="completion-status-badge not-uploaded">Not Available</span>`;
+    }
 }
