@@ -1,0 +1,170 @@
+<!-- Admin Dashboard Page -->
+<div id="dashboard" class="page">
+    <div class="page-header">
+        <h1>Admin Dashboard Overview</h1>
+        <div class="header-actions">
+            <button class="btn btn-success btn-enhanced-tour">
+                <i class="fas fa-plus-circle"></i> Apply for Tour (यात्रा के लिए आवेदन करें)
+            </button>
+            <button class="btn btn-primary" data-navigate="tours">
+                <i class="fas fa-plus"></i> Create New Tour
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <!-- Tours -->
+        <div class="stat-card">
+            <div class="stat-icon active">
+                <i class="fas fa-route"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="activeTours">12</h3>
+                <p>Active Tours</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon completed">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="completedTours">48</h3>
+                <p>Completed Tours</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon warning">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="alerts">3</h3>
+                <p>Alerts</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon info">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="activeEmployees">24</h3>
+                <p>Active Employees</p>
+            </div>
+        </div>
+
+        <!-- Leave -->
+        <div class="stat-card">
+            <div class="stat-icon info">
+                <i class="fas fa-calendar-day"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="onLeaveToday">5</h3>
+                <p>On Leave Today</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon warning">
+                <i class="fas fa-calendar-plus"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="pendingLeaveRequests">7</h3>
+                <p>Pending Leave Requests</p>
+            </div>
+        </div>
+
+        <!-- Attendance -->
+        <div class="stat-card">
+            <div class="stat-icon completed">
+                <i class="fas fa-user-check"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="checkedInToday">18</h3>
+                <p>Checked-in Today</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon danger">
+                <i class="fas fa-user-times"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="absentToday">2</h3>
+                <p>Absent Today</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-content">
+        <!-- Real-time Map -->
+        <div class="dashboard-card map-card">
+            <div class="card-header">
+                <h3>Real-time Employee Locations</h3>
+                <button class="btn btn-secondary btn-sm" id="refreshMapBtn">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+            <div class="card-content">
+                <div id="realtime-map" class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Interactive Map View</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Tours and Alerts -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Recent Applications</h3>
+                </div>
+                <div class="card-content">
+                    <div class="tour-list">
+                        <div class="tour-item">
+                            <div class="tour-avatar">JD</div>
+                            <div class="tour-details">
+                                <h4>John Doe</h4>
+                                <p>Mumbai → Delhi</p>
+                                <span class="tour-time">09:30 AM</span>
+                            </div>
+                            <div class="tour-status active">Active</div>
+                        </div>
+                        <div class="tour-item">
+                            <div class="tour-avatar">SM</div>
+                            <div class="tour-details">
+                                <h4>Sarah Miller</h4>
+                                <p>Bangalore → Chennai</p>
+                                <span class="tour-time">11:00 AM</span>
+                            </div>
+                            <div class="tour-status pending">Pending</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Recent Alerts</h3>
+                </div>
+                <div class="card-content">
+                    <div class="alert-list">
+                        <div class="alert-item warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="alert-details">
+                                <p>Employee idle for 30+ minutes</p>
+                                <span>John Doe • 5 min ago</span>
+                            </div>
+                        </div>
+                        <div class="alert-item danger">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="alert-details">
+                                <p>Geofence breach detected</p>
+                                <span>Mike Johnson • 12 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

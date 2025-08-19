@@ -1,0 +1,89 @@
+<!-- User Management Page -->
+<div id="users" class="page">
+    <div class="page-header">
+        <h1>User Management</h1>
+        <div class="header-actions">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search users...">
+            </div>
+            <button class="btn btn-primary" id="addUserBtn">
+                <i class="fas fa-user-plus"></i> Add User
+            </button>
+        </div>
+    </div>
+
+    <div class="users-table-container">
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Last Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar">JD</div>
+                            <div>
+                                <h4>John Doe</h4>
+                                <p>john.doe@company.com</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="role-badge admin">Admin</span></td>
+                    <td>Sales</td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>2 minutes ago</td>
+                    <td>
+                        <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar">SM</div>
+                            <div>
+                                <h4>Sarah Miller</h4>
+                                <p>sarah.miller@company.com</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="role-badge user">User</span></td>
+                    <td>Marketing</td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>15 minutes ago</td>
+                    <td>
+                        <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar">RJ</div>
+                            <div>
+                                <h4>Robert Johnson</h4>
+                                <p>robert.johnson@company.com</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="role-badge user">User</span></td>
+                    <td>Operations</td>
+                    <td><span class="status-badge inactive">Inactive</span></td>
+                    <td>2 hours ago</td>
+                    <td>
+                        <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+<!-- Approval Queue Page -->
+<div id="approval-queue" class="page">
+    <div class="page-header">
+        <h1>Approval Queue</h1>
+        <div class="header-actions">
+            <div class="filter-dropdown">
+                <select id="approvalFilter">
+                    <option value="">All Applications</option>
+                    <option value="pending">Pending Approval</option>
+                    <option value="urgent">Urgent Priority</option>
+                    <option value="high">High Priority</option>
+                </select>
+            </div>
+            <button class="btn btn-secondary" onclick="app.refreshApprovalQueue()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+    </div>
+
+    <div class="approval-queue-container" id="approvalQueueContainer">
+        <!-- Sample approval items -->
+        <div class="approval-item urgent">
+            <div class="approval-header">
+                <div class="applicant-info">
+                    <div class="applicant-avatar">JD</div>
+                    <div>
+                        <h4>John Doe</h4>
+                        <p>Senior Manager - IT Department</p>
+                    </div>
+                </div>
+                <div class="priority-badge urgent">Urgent</div>
+            </div>
+            <div class="approval-body">
+                <div class="tour-details">
+                    <div class="detail-item">
+                        <i class="fas fa-route"></i>
+                        <span>Mumbai → Delhi</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Dec 15-18, 2024</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Official Meeting</span>
+                    </div>
+                </div>
+                <div class="approval-actions">
+                    <button class="btn btn-success btn-sm" onclick="app.approveApplication('APP001')">
+                        <i class="fas fa-check"></i> Approve
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="app.rejectApplication('APP001')">
+                        <i class="fas fa-times"></i> Reject
+                    </button>
+                    <button class="btn btn-info btn-sm" onclick="app.viewApplicationDetails('APP001')">
+                        <i class="fas fa-eye"></i> View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="approval-item high">
+            <div class="approval-header">
+                <div class="applicant-info">
+                    <div class="applicant-avatar">SM</div>
+                    <div>
+                        <h4>Sarah Miller</h4>
+                        <p>Marketing Executive</p>
+                    </div>
+                </div>
+                <div class="priority-badge high">High</div>
+            </div>
+            <div class="approval-body">
+                <div class="tour-details">
+                    <div class="detail-item">
+                        <i class="fas fa-route"></i>
+                        <span>Bangalore → Chennai</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Dec 20-22, 2024</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Training Program</span>
+                    </div>
+                </div>
+                <div class="approval-actions">
+                    <button class="btn btn-success btn-sm" onclick="app.approveApplication('APP002')">
+                        <i class="fas fa-check"></i> Approve
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="app.rejectApplication('APP002')">
+                        <i class="fas fa-times"></i> Reject
+                    </button>
+                    <button class="btn btn-info btn-sm" onclick="app.viewApplicationDetails('APP002')">
+                        <i class="fas fa-eye"></i> View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="approval-item medium">
+            <div class="approval-header">
+                <div class="applicant-info">
+                    <div class="applicant-avatar">RJ</div>
+                    <div>
+                        <h4>Robert Johnson</h4>
+                        <p>Operations Manager</p>
+                    </div>
+                </div>
+                <div class="priority-badge medium">Medium</div>
+            </div>
+            <div class="approval-body">
+                <div class="tour-details">
+                    <div class="detail-item">
+                        <i class="fas fa-route"></i>
+                        <span>Pune → Hyderabad</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Dec 25-27, 2024</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Site Inspection</span>
+                    </div>
+                </div>
+                <div class="approval-actions">
+                    <button class="btn btn-success btn-sm" onclick="app.approveApplication('APP003')">
+                        <i class="fas fa-check"></i> Approve
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="app.rejectApplication('APP003')">
+                        <i class="fas fa-times"></i> Reject
+                    </button>
+                    <button class="btn btn-info btn-sm" onclick="app.viewApplicationDetails('APP003')">
+                        <i class="fas fa-eye"></i> View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

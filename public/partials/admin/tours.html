@@ -1,0 +1,116 @@
+<!-- Tours Management Page -->
+<div id="tours" class="page">
+    <div class="page-header">
+        <h1>Tour Management</h1>
+        <div class="header-actions">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search tours...">
+            </div>
+            <button class="btn btn-primary" id="addTourBtn">
+                <i class="fas fa-plus"></i> Add Tour
+            </button>
+        </div>
+    </div>
+
+    <div class="tours-grid">
+        <div class="tour-card">
+            <div class="tour-card-header">
+                <div class="employee-info">
+                    <div class="employee-avatar">JD</div>
+                    <div>
+                        <h3>John Doe</h3>
+                        <p>Senior Sales Rep</p>
+                    </div>
+                </div>
+                <div class="tour-actions">
+                    <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="tour-card-body">
+                <div class="route-info">
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt start"></i>
+                        <span>New York, NY</span>
+                    </div>
+                    <div class="route-line"></div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt end"></i>
+                        <span>Boston, MA</span>
+                    </div>
+                </div>
+                <div class="tour-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <span class="progress-text">65% Complete</span>
+                </div>
+                <div class="tour-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>2h 30m remaining</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-car"></i>
+                        <span>Car</span>
+                    </div>
+                </div>
+            </div>
+            <div class="tour-card-footer">
+                <div class="tour-status active">Active</div>
+                <button class="btn btn-secondary btn-sm">View Details</button>
+            </div>
+        </div>
+
+        <!-- Add more tour cards as needed -->
+        <div class="tour-card">
+            <div class="tour-card-header">
+                <div class="employee-info">
+                    <div class="employee-avatar">SM</div>
+                    <div>
+                        <h3>Sarah Miller</h3>
+                        <p>Marketing Manager</p>
+                    </div>
+                </div>
+                <div class="tour-actions">
+                    <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="tour-card-body">
+                <div class="route-info">
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt start"></i>
+                        <span>Mumbai, MH</span>
+                    </div>
+                    <div class="route-line"></div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt end"></i>
+                        <span>Delhi, DL</span>
+                    </div>
+                </div>
+                <div class="tour-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 30%"></div>
+                    </div>
+                    <span class="progress-text">30% Complete</span>
+                </div>
+                <div class="tour-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>5h 15m remaining</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-plane"></i>
+                        <span>Flight</span>
+                    </div>
+                </div>
+            </div>
+            <div class="tour-card-footer">
+                <div class="tour-status pending">Pending</div>
+                <button class="btn btn-secondary btn-sm">View Details</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -33,7 +33,21 @@ export function initLogin(appInstance) {
         return;
       }
 
-      loginPage.style.display = 'none';
+      // Store user role in localStorage for component loader
+      localStorage.setItem('userRole', userRole);
+      localStorage.setItem('userName', userName);
+
+      // Hide login page and show main app
+      if (loginPage) {
+        loginPage.style.display = 'none';
+      }
+      
+      // Hide login container
+      const loginContainer = document.getElementById('login-container');
+      if (loginContainer) {
+        loginContainer.style.display = 'none';
+      }
+      
       document.body.classList.add('app-visible', `${userRole}-role`);
 
       if (!window.app) window.app = {};
@@ -60,7 +74,21 @@ export function initLogin(appInstance) {
   skipBtn.textContent = 'Skip as Admin (Demo)';
   skipBtn.className = 'skip-login-btn';
   skipBtn.onclick = function () {
-    loginPage.style.display = 'none';
+    // Store user role in localStorage for component loader
+    localStorage.setItem('userRole', 'admin');
+    localStorage.setItem('userName', 'Admin User');
+    
+    // Hide login page and show main app
+    if (loginPage) {
+      loginPage.style.display = 'none';
+    }
+    
+    // Hide login container
+    const loginContainer = document.getElementById('login-container');
+    if (loginContainer) {
+      loginContainer.style.display = 'none';
+    }
+    
     document.body.classList.add('app-visible', 'admin-role');
     appInstance.setUserRole('admin', 'Admin User');
     skipBtn.remove();

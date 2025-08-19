@@ -1,0 +1,151 @@
+<!-- Alerts Page -->
+<div id="alerts" class="page">
+    <div class="page-header">
+        <h1>Alerts & Notifications</h1>
+        <div class="header-actions">
+            <button class="btn btn-success" onclick="app.markAllRead()">
+                <i class="fas fa-check-double"></i> Mark All Read
+            </button>
+            <button class="btn btn-secondary" onclick="app.refreshAlerts()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+    </div>
+
+    <div class="alerts-content">
+        <div class="alerts-filters">
+            <div class="filter-group">
+                <label>Alert Type:</label>
+                <select id="alertTypeFilter">
+                    <option value="">All Types</option>
+                    <option value="geofence">Geofence Breach</option>
+                    <option value="idle">Employee Idle</option>
+                    <option value="approval">Approval Required</option>
+                    <option value="system">System Alert</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Priority:</label>
+                <select id="alertPriorityFilter">
+                    <option value="">All Priorities</option>
+                    <option value="critical">Critical</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Status:</label>
+                <select id="alertStatusFilter">
+                    <option value="">All Status</option>
+                    <option value="unread">Unread</option>
+                    <option value="read">Read</option>
+                    <option value="resolved">Resolved</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="alerts-stats">
+            <div class="stat-card">
+                <div class="stat-icon danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>5</h3>
+                    <p>Critical Alerts</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon warning">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>12</h3>
+                    <p>Unread Alerts</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon info">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>8</h3>
+                    <p>Today's Alerts</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="alerts-list">
+            <div class="alert-item critical unread">
+                <div class="alert-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="alert-content">
+                    <div class="alert-header">
+                        <h4>Geofence Breach Detected</h4>
+                        <span class="alert-time">2 minutes ago</span>
+                    </div>
+                    <div class="alert-details">
+                        <p>Employee John Doe has moved outside the designated tour area in Mumbai</p>
+                        <div class="alert-meta">
+                            <span class="employee-tag">John Doe (EMP001)</span>
+                            <span class="location-tag">Mumbai Central</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-actions">
+                    <button class="btn btn-sm btn-primary">View Location</button>
+                    <button class="btn btn-sm btn-secondary">Mark Read</button>
+                    <button class="btn btn-sm btn-success">Resolve</button>
+                </div>
+            </div>
+
+            <div class="alert-item high unread">
+                <div class="alert-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="alert-content">
+                    <div class="alert-header">
+                        <h4>Employee Idle Alert</h4>
+                        <span class="alert-time">15 minutes ago</span>
+                    </div>
+                    <div class="alert-details">
+                        <p>Sarah Miller has been idle for more than 30 minutes during tour hours</p>
+                        <div class="alert-meta">
+                            <span class="employee-tag">Sarah Miller (EMP002)</span>
+                            <span class="location-tag">Bangalore Tech Park</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-actions">
+                    <button class="btn btn-sm btn-primary">Contact Employee</button>
+                    <button class="btn btn-sm btn-secondary">Mark Read</button>
+                    <button class="btn btn-sm btn-success">Resolve</button>
+                </div>
+            </div>
+
+            <div class="alert-item medium read">
+                <div class="alert-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="alert-content">
+                    <div class="alert-header">
+                        <h4>Approval Required</h4>
+                        <span class="alert-time">1 hour ago</span>
+                    </div>
+                    <div class="alert-details">
+                        <p>New tour application requires your approval</p>
+                        <div class="alert-meta">
+                            <span class="employee-tag">Mike Johnson (EMP003)</span>
+                            <span class="tour-tag">Delhi → Kolkata</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-actions">
+                    <button class="btn btn-sm btn-primary">Review Application</button>
+                    <button class="btn btn-sm btn-success">Resolve</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

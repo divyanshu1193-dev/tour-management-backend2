@@ -1,0 +1,79 @@
+<!-- My Tours Page -->
+<div id="my-tours" class="page">
+    <div class="page-header">
+        <h1>My Tours</h1>
+        <div class="header-actions">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search tours..." id="myToursSearch">
+            </div>
+            <div class="filter-dropdown">
+                <select id="tourTypeFilter">
+                    <option value="">All Tours</option>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="upcoming">Upcoming</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            <button class="btn btn-success" data-navigate="new-application">
+                <i class="fas fa-plus"></i> New Tour Request
+            </button>
+            <button class="btn btn-secondary" onclick="app.refreshTours()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+    </div>
+
+    <!-- Tour Status Summary -->
+    <div class="tour-summary">
+        <div class="summary-cards">
+            <div class="summary-card ongoing">
+                <i class="fas fa-plane-departure"></i>
+                <div>
+                    <h3 id="ongoingToursCount">1</h3>
+                    <p>Ongoing Tours</p>
+                </div>
+            </div>
+            <div class="summary-card upcoming">
+                <i class="fas fa-calendar-plus"></i>
+                <div>
+                    <h3 id="upcomingToursCount">2</h3>
+                    <p>Upcoming Tours</p>
+                </div>
+            </div>
+            <div class="summary-card completed">
+                <i class="fas fa-check-double"></i>
+                <div>
+                    <h3 id="completedToursCount">5</h3>
+                    <p>Completed Tours</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-wrapper">
+            <table class="data-table" id="myToursTable">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Request No</th>
+                        <th>Route</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Purpose</th>
+                        <th>Tour Status</th>
+                        <th>Travel Status</th>
+                        <th>Reports</th>
+                        <th>Tickets</th>
+                        <th>Tour Completion</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

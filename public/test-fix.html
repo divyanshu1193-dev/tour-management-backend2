@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Fix - Tour Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .test-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 9999;
+            max-width: 300px;
+            font-size: 12px;
+        }
+        .test-button {
+            margin: 5px;
+            padding: 5px 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h4>Test Controls</h4>
+        <button class="test-button" onclick="testLogin()">Test Login</button>
+        <button class="test-button" onclick="testLogout()">Test Logout</button>
+        <button class="test-button" onclick="checkElements()">Check Elements</button>
+        <div id="test-status"></div>
+    </div>
+
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Login Component -->
+    <div id="login-container"></div>
+
+    <div class="main-container">
+        <!-- Sidebar Component -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="main-content">
+            <h1>Test Content Area</h1>
+            <p>This should be visible after login.</p>
+        </main>
+    </div>
+
+    <!-- Modals Container -->
+    <div id="modals-container"></div>
+
+    <script type="module">
+        import ComponentLoader from './js/componentLoader.js';
+        import { TourManager } from './js/TourManager.js';
+        import { updateNavigationForRole } from './js/navigation.js';
+
+        const componentLoader = new ComponentLoader();
+        window.componentLoader = componentLoader;
+        
+        const app = new TourManager();
+        window.app = app;
+        window.updateNavigationForRole = updateNavigationForRole;
+
+        // Initialize components
+        componentLoader.initialize();
+
+        window.testLogin = function() {
+            console.log('Testing login...');
+            
+            // Simulate login
+            localStorage.setItem('userRole', 'user');
+            localStorage.setItem('userName', 'Test User');
+            
+            // Hide login
+            const loginContainer = document.getElementById('login-container');
+            if (loginContainer) {
+                loginContainer.style.display = 'none';
+            }
+            
+            // Show app
+            document.body.classList.add('app-visible', 'user-role');
+            
+            // Set user role
+            app.setUserRole('user', 'Test User');
+            
+            document.getElementById('test-status').innerHTML = '<div style="color: green;">✓ Login test completed</div>';
+        };
+
+        window.testLogout = function() {
+            console.log('Testing logout...');
+            
+            // Clear storage
+            localStorage.clear();
+            
+            // Show login
+            const loginContainer = document.getElementById('login-container');
+            if (loginContainer) {
+                loginContainer.style.display = 'block';
+            }
+            
+            // Hide app
+            document.body.classList.remove('app-visible', 'user-role', 'admin-role');
+            
+            document.getElementById('test-status').innerHTML = '<div style="color: blue;">✓ Logout test completed</div>';
+        };
+
+        window.checkElements = function() {
+            const elements = {
+                'header-container': document.getElementById('header-container'),
+                'login-container': document.getElementById('login-container'),
+                'sidebar-container': document.getElementById('sidebar-container'),
+                'main-content': document.getElementById('main-content'),
+                'main-container': document.querySelector('.main-container')
+            };
+
+            let status = '<h5>Element Status:</h5>';
+            for (const [name, element] of Object.entries(elements)) {
+                const exists = element ? '✓' : '✗';
+                const display = element ? getComputedStyle(element).display : 'N/A';
+                status += `<div>${exists} ${name}: ${display}</div>`;
+            }
+
+            const bodyClasses = document.body.className;
+            status += `<div><strong>Body classes:</strong> ${bodyClasses}</div>`;
+
+            document.getElementById('test-status').innerHTML = status;
+        };
+
+        // Auto-check elements after initialization
+        setTimeout(() => {
+            checkElements();
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!-- Quick Request Modal -->
+<div id="newRequestModal" class="modal">
+    <div class="modal-content large-modal">
+        <div class="modal-header">
+            <h3>Quick Tour Request</h3>
+            <button class="btn-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="newRequestForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Employee Name</label>
+                        <input type="text" name="employeeName" value="John Doe" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Employee Code</label>
+                        <input type="text" name="employeeCode" value="EMP001" readonly>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Designation</label>
+                        <input type="text" name="designation" value="Sales Manager" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Department</label>
+                        <input type="text" name="department" value="Sales" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Origin</label>
+                        <input type="text" name="origin" placeholder="Enter origin city" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Destination</label>
+                        <input type="text" name="destination" placeholder="Enter destination city" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>From Date</label>
+                        <input type="date" name="fromDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>To Date</label>
+                        <input type="date" name="toDate" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Advance Required</label>
+                        <input type="number" name="advanceRequired" placeholder="Enter amount in ₹" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Ticket Arranged By</label>
+                        <select name="ticketArrangedBy" required>
+                            <option value="">Select Option</option>
+                            <option value="self">Self</option>
+                            <option value="company">Company</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Purpose of Tour</label>
+                    <textarea name="purposeOfTour" rows="3" placeholder="Describe the purpose of your tour" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Notes</label>
+                    <textarea name="additionalNotes" rows="2" placeholder="Any additional information"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary modal-close">Cancel</button>
+            <button class="btn btn-primary" id="submitRequestBtn">Submit Request</button>
+        </div>
+    </div>
+</div>

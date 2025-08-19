@@ -49,6 +49,7 @@ export class TourManager {
    * Called by auth.js after successful login
    */
   setUserRole(role, name) {
+    console.log(`TourManager: Setting user role to ${role}, name: ${name}`);
     this.userRole = role;
     this.userName = name;
 
@@ -59,25 +60,47 @@ export class TourManager {
     const uname = document.getElementById('officialUserName');
     if (uname) uname.textContent = this.userName;
 
+    // Update navigation for role
+    setTimeout(() => {
+      if (window.updateNavigationForRole) {
+        window.updateNavigationForRole(role);
+      }
+    }, 200);
+
     // Show correct dashboard
     this.navigateTo(role === 'user' ? 'user-dashboard' : 'dashboard');
   }
 
   /**
    * Navigation + page-specific module calls
+   * Updated to work with modular component system
    */
-  navigateTo(page) {
-    // Update active nav item
-    document.querySelectorAll('.nav-item.active').forEach(n => n.classList.remove('active'));
-    document.querySelector(`.nav-item[data-page="${page}"]`)?.classList.add('active');
-
-    // Show page
-    document.querySelectorAll('.page.active').forEach(p => p.classList.remove('active'));
-    document.getElementById(page)?.classList.add('active');
-
+  async navigateTo(page) {
+    console.log(`TourManager: Navigating to ${page}, userRole: ${this.userRole}`);
     this.currentPage = page;
 
-    // Load content based on page
+    // Use component loader for navigation
+    if (window.componentLoader) {
+      try {
+        await window.componentLoader.loadPage(page, this.userRole);
+        
+        // After component is loaded, run page-specific initialization
+        setTimeout(() => {
+          console.log(`TourManager: Initializing page content for ${page}`);
+          this.initializePageContent(page);
+        }, 100); // Small delay to ensure DOM is ready
+      } catch (error) {
+        console.error(`Error navigating to ${page}:`, error);
+      }
+    } else {
+      console.error('ComponentLoader not available');
+    }
+  }
+
+  /**
+   * Initialize page-specific content after component is loaded
+   */
+  initializePageContent(page) {
     switch (page) {
       case 'my-applications':
         loadAndRenderMyApplications(this);
@@ -98,6 +121,7 @@ export class TourManager {
       case 'alerts':
         loadAndRenderAlerts(this);
         break;
+      case 'users':
       case 'user-management':
         loadAndRenderUsers(this);
         break;
@@ -112,24 +136,34 @@ export class TourManager {
 
   /**
    * Global event listeners from original app.js
+   * Updated to work with modular component system
    */
   setupGlobalEventListeners() {
-    // Navigation
-    document.querySelectorAll('.nav-item').forEach(item => {
-      item.addEventListener('click', e => {
+    // Use event delegation for navigation since nav items are loaded dynamically
+    document.addEventListener('click', (e) => {
+      // Navigation handling for sidebar nav items
+      const navItem = e.target.closest('.nav-item');
+      if (navItem && navItem.dataset.page) {
         e.preventDefault();
-        this.navigateTo(item.dataset.page);
-      });
-    });
+        this.navigateTo(navItem.dataset.page);
+        return;
+      }
 
-    // Logout
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', e => {
+      // Navigation handling for dashboard buttons and links
+      const navigateElement = e.target.closest('[data-navigate]');
+      if (navigateElement) {
+        e.preventDefault();
+        this.navigateTo(navigateElement.dataset.navigate);
+        return;
+      }
+
+      // Logout handling
+      if (e.target.id === 'logoutBtn' || e.target.closest('#logoutBtn')) {
         e.preventDefault();
         this.logout();
-      });
-    }
+        return;
+      }
+    });
 
     // Modal close
     document.querySelectorAll('.modal-close, .btn-close').forEach(btn =>
@@ -187,11 +221,22 @@ export class TourManager {
    * Logout handling – matches app.js behaviour
    */
   logout() {
+    console.log('TourManager: Logging out user');
+    
+    // Clear localStorage
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userName');
+    
     // Reset app state
     this.userRole = null;
     this.userName = '';
     this.loggedInUser = null;
     document.body.classList.remove('admin-role', 'user-role', 'app-visible');
+
+    // Clear component loader cache
+    if (window.componentLoader) {
+      window.componentLoader.clearCache();
+    }
 
     // Refresh / show login page
     location.reload();

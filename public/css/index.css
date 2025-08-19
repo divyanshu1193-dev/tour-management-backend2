@@ -1,0 +1,35 @@
+/* Entry point for modular CSS build */
+@import './base/reset.css';
+@import './base/variables.css';
+@import './base/typography.css';
+
+@import './layout/header.css';
+@import './layout/sidebar.css';
+@import './layout/main.css';
+@import './layout/grid.css';
+
+@import './components/buttons.css';
+@import './components/forms.css';
+@import './components/cards.css';
+@import './components/modals.css';
+@import './components/tables.css';
+@import './components/badges.css';
+@import './components/dropdowns.css';
+@import './components/notifications.css';
+
+@import './pages/login.css';
+@import './pages/alerts.css';
+@import './pages/reports.css';
+@import './pages/settings.css';
+@import './pages/users.css';
+@import './pages/tours.css';
+@import './pages/dashboard.css';
+
+@import './utilities/helpers.css';
+@import './utilities/spacing.css';
+@import './utilities/display.css';
+@import './utilities/colors.css';
+@import './utilities/visibility.css';
+
+/* Temporary: import legacy styles to keep UI intact while we split */
+@import './legacy.css';

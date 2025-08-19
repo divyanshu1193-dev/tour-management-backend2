@@ -1,0 +1,274 @@
+<!-- New Application Page -->
+<div id="new-application" class="page">
+    <div class="page-header">
+        <h1>New Tour Application / नया यात्रा आवेदन</h1>
+        <div class="header-actions">
+            <button class="btn btn-secondary" data-navigate="my-applications">
+                <i class="fas fa-arrow-left"></i> Back to Applications
+            </button>
+            <button class="btn btn-info" onclick="app.clearForm()">
+                <i class="fas fa-refresh"></i> Clear Form
+            </button>
+        </div>
+    </div>
+
+    <div class="new-application-content">
+        <form id="newApplicationForm">
+            <!-- Personal Information Section -->
+            <div class="form-section">
+                <h4 class="section-title">Personal Information / व्यक्तिगत जानकारी</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name (पूरा नाम) *</label>
+                        <input type="text" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Employee ID (कर्मचारी आईडी) *</label>
+                        <input type="text" name="employeeId" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number (मोबाइल नंबर) *</label>
+                        <input type="tel" name="mobile" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email Address (ईमेल पता) *</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>District Name (जिला) *</label>
+                        <select id="districtDropdown" name="district_name" required>
+                            <option value="">Select District</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ulbDropdown">ULB Name</label>
+                        <select id="ulbDropdown" name="ulb_name_en" required>
+                            <option value="">Select ULB</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Designation (पदनाम) *</label>
+                        <input type="text" name="designation" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour Details Section -->
+            <div class="form-section">
+                <h4 class="section-title">Tour Details (यात्रा विवरण)</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tour Type (यात्रा प्रकार) *</label>
+                        <select name="tourType" required>
+                            <option value="">Select Tour Type</option>
+                            <option value="official">Official Tour</option>
+                            <option value="training">Training Program</option>
+                            <option value="conference">Conference/Seminar</option>
+                            <option value="meeting">Official Meeting</option>
+                            <option value="inspection">Site Inspection</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority Level (प्राथमिकता) *</label>
+                        <select name="priority" required>
+                            <option value="">Select Priority</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Travel Information -->
+                <div class="travel-section">
+                    <h5>Travel Information (यात्रा जानकारी)</h5>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Origin Station (प्रस्थान स्थल) *</label>
+                            <input type="text" name="originStation" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Destination Station (गंतव्य स्थल) *</label>
+                            <input type="text" name="destinationStation" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Departure Date & Time (प्रस्थान दिनांक और समय) *</label>
+                            <div class="datetime-group">
+                                <input type="date" name="departureDate" required>
+                                <input type="time" name="departureTime" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Arrival Date & Time (आगमन दिनांक और समय) *</label>
+                            <div class="datetime-group">
+                                <input type="date" name="arrivalDate" required>
+                                <input type="time" name="arrivalTime" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mode of Travel & Accommodation -->
+                <div class="travel-mode-section">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Mode of Travel (यात्रा का साधन) *</label>
+                            <select name="modeOfTravel" required>
+                                <option value="">Select Mode</option>
+                                <option value="train">Train (रेल)</option>
+                                <option value="flight">Flight (विमान)</option>
+                                <option value="bus">Bus (बस)</option>
+                                <option value="car">Car (कार)</option>
+                                <option value="taxi">Taxi (टैक्सी)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Class of Travel (यात्रा वर्ग) *</label>
+                            <select name="classOfTravel" required>
+                                <option value="">Select Class</option>
+                                <option value="3ac">3rd AC</option>
+                                <option value="2ac">2nd AC</option>
+                                <option value="1ac">1st AC</option>
+                                <option value="economy">Economy</option>
+                                <option value="business">Business</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Accommodation Required (आवास आवश्यक) *</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="accommodationRequired" value="yes"> Yes (हाँ)
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="accommodationRequired" value="no"> No (नहीं)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Advance Required (अग्रिम राशि)</label>
+                            <input type="number" name="advanceAmount" placeholder="Enter amount in ₹">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purpose and Documents Section -->
+            <div class="form-section">
+                <h4 class="section-title">Purpose & Documents (उद्देश्य और दस्तावेज़)</h4>
+                <div class="form-group">
+                    <label>Purpose of Tour (यात्रा का उद्देश्य) *</label>
+                    <textarea name="tourPurpose" rows="4" placeholder="Describe the purpose of your tour in detail..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Supporting Documents (सहायक दस्तावेज़)</label>
+                    <div class="file-upload-area">
+                        <input type="file" name="supportingDocs" multiple accept=".pdf,.doc,.docx,.jpg,.png" style="display: none;">
+                        <div class="file-upload-text">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload or drag and drop files here</p>
+                            <small>Supported formats: PDF, DOC, DOCX, JPG, PNG (Max 5MB each)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Details Section -->
+            <div class="form-section">
+                <h4 class="section-title">Financial Details (वित्तीय विवरण)</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Estimated Total Cost (अनुमानित कुल लागत)</label>
+                        <input type="number" name="estimatedCost" placeholder="Enter amount in ₹" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Budget Head (बजट शीर्ष)</label>
+                        <select name="budgetHead">
+                            <option value="">Select Budget Head</option>
+                            <option value="training">Training & Development</option>
+                            <option value="official">Official Tours</option>
+                            <option value="conference">Conference & Seminars</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="cost-breakdown">
+                    <h5>Cost Breakdown (लागत विवरण)</h5>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Travel Cost (यात्रा व्यय)</label>
+                            <input type="number" name="travelCost" placeholder="₹">
+                        </div>
+                        <div class="form-group">
+                            <label>Accommodation Cost (आवास व्यय)</label>
+                            <input type="number" name="accommodationCost" placeholder="₹">
+                        </div>
+                        <div class="form-group">
+                            <label>Miscellaneous Cost (विविध व्यय)</label>
+                            <input type="number" name="miscCost" placeholder="₹">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approval Section -->
+            <div class="form-section">
+                <h4 class="section-title">Approval Details (अनुमोदन विवरण)</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Reporting Officer (रिपोर्टिंग अधिकारी) *</label>
+                        <input type="text" name="reportingOfficer" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Approving Authority (अनुमोदन प्राधिकारी) *</label>
+                        <select name="approvingAuthority" required>
+                            <option value="">Select Authority</option>
+                            <option value="hod">Head of Department</option>
+                            <option value="director">Director</option>
+                            <option value="secretary">Secretary</option>
+                            <option value="minister">Minister</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Declaration -->
+            <div class="form-section">
+                <h4 class="section-title">Declaration (घोषणा)</h4>
+                <div class="declaration-text">
+                    <p>I hereby declare that the information provided above is true and correct to the best of my knowledge. I understand that any false information may result in the cancellation of my tour application.</p>
+                    <p>मैं घोषणा करता/करती हूँ कि ऊपर दी गई जानकारी मेरी जानकारी के अनुसार सत्य और सही है। मैं समझता/समझती हूँ कि किसी भी गलत जानकारी के कारण मेरा यात्रा आवेदन रद्द हो सकता है।</p>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="declaration" required>
+                        I agree to the above declaration (मैं उपरोक्त घोषणा से सहमत हूँ)
+                    </label>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" data-navigate="my-applications">
+                    <i class="fas fa-times"></i> Cancel (रद्द करें)
+                </button>
+                <button type="button" class="btn btn-warning" onclick="app.saveDraft()">
+                    <i class="fas fa-save"></i> Save as Draft (ड्राफ्ट सेव करें)
+                </button>
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-paper-plane"></i> Submit Application (आवेदन जमा करें)
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

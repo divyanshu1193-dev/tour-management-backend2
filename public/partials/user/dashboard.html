@@ -1,0 +1,162 @@
+<!-- User Dashboard Page -->
+<div id="user-dashboard" class="page">
+    <div class="page-header">
+        <h1>My Dashboard</h1>
+        <div class="header-actions">
+            <button class="btn btn-success btn-enhanced-tour">
+                <i class="fas fa-plus-circle"></i> Apply for Tour (यात्रा के लिए आवेदन करें)
+            </button>
+            <button class="btn btn-primary" data-navigate="new-application">
+                <i class="fas fa-plus"></i> Quick Request
+            </button>
+        </div>
+    </div>
+
+    <!-- User Stats Cards -->
+    <div class="stats-grid">
+        <!-- Tours -->
+        <div class="stat-card">
+            <div class="stat-icon active">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="userPendingRequests">3</h3>
+                <p>Pending Requests</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon completed">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="userCompletedTours">12</h3>
+                <p>Completed Tours</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon warning">
+                <i class="fas fa-route"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="userActiveTours">2</h3>
+                <p>Active Tours</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon info">
+                <i class="fas fa-calendar"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="userUpcomingTours">5</h3>
+                <p>Upcoming Tours</p>
+            </div>
+        </div>
+
+        <!-- Leave -->
+        <div class="stat-card">
+            <div class="stat-icon warning">
+                <i class="fas fa-calendar-plus"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="userPendingLeaveRequests">1</h3>
+                <p>My Pending Leave Requests</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon info">
+                <i class="fas fa-calendar-day"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="userUpcomingLeaveDays">2</h3>
+                <p>Upcoming Leave Days</p>
+            </div>
+        </div>
+
+        <!-- Attendance -->
+        <div class="stat-card">
+            <div class="stat-icon completed">
+                <i class="fas fa-user-check"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="userPresentDaysMonth">12</h3>
+                <p>Days Present (Month)</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon danger">
+                <i class="fas fa-user-times"></i>
+            </div>
+            <div class="stat-info">
+                <h3 data-metric="userAbsentDaysMonth">0</h3>
+                <p>Days Absent (Month)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-dashboard-content">
+        <!-- My Recent Tours -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3>My Recent Tours</h3>
+                <a href="#" class="btn btn-secondary btn-sm" data-navigate="my-tours">
+                    View All
+                </a>
+            </div>
+            <div class="card-content">
+                <div class="user-tour-list">
+                    <div class="user-tour-item">
+                        <div class="tour-info">
+                            <h4>Business Meeting</h4>
+                            <p>Mumbai → Delhi</p>
+                            <span class="tour-date">Aug 10, 2025</span>
+                        </div>
+                        <div class="tour-status approved">Approved</div>
+                    </div>
+                    <div class="user-tour-item">
+                        <div class="tour-info">
+                            <h4>Client Visit</h4>
+                            <p>Bangalore → Chennai</p>
+                            <span class="tour-date">Aug 15, 2025</span>
+                        </div>
+                        <div class="tour-status pending">Pending</div>
+                    </div>
+                    <div class="user-tour-item">
+                        <div class="tour-info">
+                            <h4>Training Program</h4>
+                            <p>Pune → Hyderabad</p>
+                            <span class="tour-date">Aug 20, 2025</span>
+                        </div>
+                        <div class="tour-status in-progress">In Progress</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3>Quick Actions</h3>
+            </div>
+            <div class="card-content">
+                <div class="quick-actions">
+                    <button class="quick-action-btn btn-enhanced-tour">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>New Application</span>
+                    </button>
+                    <button class="quick-action-btn" data-navigate="my-applications">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>My Applications</span>
+                    </button>
+                    <button class="quick-action-btn" data-navigate="my-tours">
+                        <i class="fas fa-route"></i>
+                        <span>My Tours</span>
+                    </button>
+                    <button class="quick-action-btn" data-navigate="reports">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reports</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

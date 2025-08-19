@@ -1,0 +1,5 @@
+/* Main layout helpers */
+.page { display: none; }
+.page.active { display: block; }
+.main-content .page { display: none; }
+.main-content .page.active { display: block; }

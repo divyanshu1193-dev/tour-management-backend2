@@ -1,0 +1,19 @@
+/* Login page */
+.login-page { position: fixed; inset: 0; width: 100%; height: 100vh; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+.login-page.hidden { display: none; }
+.login-container { background: #fff; border-radius: 12px; padding: 3rem; width: 90%; max-width: 400px; box-shadow: var(--shadow-2); }
+.login-header { text-align: center; margin-bottom: 2rem; }
+.login-header .logo { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; }
+.login-header .logo i { font-size: 2rem; color: var(--color-primary); }
+.login-header .logo h1 { font-size: 1.8rem; color: var(--color-text); margin: 0; text-align: center; }
+.login-header p { color: var(--color-muted); margin: 0.5rem 0 0; font-size: 0.9rem; text-align: center; }
+.login-form { display: flex; flex-direction: column; gap: 1.5rem; }
+.login-form .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.login-form label { font-weight: 500; color: var(--color-text); }
+.login-form input { padding: 0.75rem; border: 2px solid var(--color-border); border-radius: 6px; font-size: 1rem; transition: border-color 0.3s; }
+.login-form input:focus { outline: none; border-color: var(--color-primary); }
+.login-btn { padding: 0.75rem; background: var(--color-primary); color: #fff; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s; }
+.login-btn:hover { background: var(--color-primary-dark); }
+.demo-credentials { background: var(--color-bg); padding: 1rem; border-radius: 6px; margin-top: 1rem; text-align: center; }
+.demo-credentials p { margin: 0.25rem 0; font-size: 0.9rem; color: var(--color-muted); }
+.demo-credentials strong { color: var(--color-text); }

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Tour Management System</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .debug-section h3 { margin-top: 0; }
+        .status { padding: 5px 10px; margin: 5px 0; border-radius: 3px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Tour Management System - Debug Page</h1>
+    
+    <div class="debug-section">
+        <h3>Component Loading Test</h3>
+        <button onclick="testComponentLoader()">Test Component Loader</button>
+        <button onclick="testNavigation()">Test Navigation</button>
+        <button onclick="clearStorage()">Clear Storage</button>
+        <div id="component-status"></div>
+    </div>
+
+    <div class="debug-section">
+        <h3>Storage Status</h3>
+        <div id="storage-status"></div>
+        <button onclick="checkStorage()">Check Storage</button>
+    </div>
+
+    <div class="debug-section">
+        <h3>Component Test Area</h3>
+        <div id="test-container" style="border: 1px solid #ddd; padding: 10px; min-height: 100px;">
+            <!-- Components will be loaded here for testing -->
+        </div>
+    </div>
+
+    <div class="debug-section">
+        <h3>Console Logs</h3>
+        <div id="console-logs" style="background: #f8f9fa; padding: 10px; max-height: 300px; overflow-y: auto;">
+            <!-- Console logs will appear here -->
+        </div>
+    </div>
+
+    <script type="module">
+        import ComponentLoader from './js/componentLoader.js';
+        
+        window.debugComponentLoader = new ComponentLoader();
+        
+        // Capture console logs
+        const originalLog = console.log;
+        const originalError = console.error;
+        const logsContainer = document.getElementById('console-logs');
+        
+        function addLog(message, type = 'log') {
+            const logElement = document.createElement('div');
+            logElement.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logElement.className = type === 'error' ? 'error' : 'info';
+            logsContainer.appendChild(logElement);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLog(args.join(' '), 'log');
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLog(args.join(' '), 'error');
+        };
+        
+        window.testComponentLoader = async function() {
+            const statusDiv = document.getElementById('component-status');
+            statusDiv.innerHTML = '<div class="status info">Testing component loader...</div>';
+            
+            try {
+                await window.debugComponentLoader.loadComponent('partials/header.html', 'test-container');
+                statusDiv.innerHTML = '<div class="status success">✓ Component loader working!</div>';
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="status error">✗ Component loader failed: ${error.message}</div>`;
+            }
+        };
+        
+        window.testNavigation = async function() {
+            const statusDiv = document.getElementById('component-status');
+            statusDiv.innerHTML = '<div class="status info">Testing navigation...</div>';
+            
+            try {
+                localStorage.setItem('userRole', 'user');
+                await window.debugComponentLoader.loadPage('user-dashboard', 'user');
+                statusDiv.innerHTML = '<div class="status success">✓ Navigation working!</div>';
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="status error">✗ Navigation failed: ${error.message}</div>`;
+            }
+        };
+        
+        window.checkStorage = function() {
+            const statusDiv = document.getElementById('storage-status');
+            const userRole = localStorage.getItem('userRole');
+            const userName = localStorage.getItem('userName');
+            
+            statusDiv.innerHTML = `
+                <div class="status info">User Role: ${userRole || 'Not set'}</div>
+                <div class="status info">User Name: ${userName || 'Not set'}</div>
+            `;
+        };
+        
+        window.clearStorage = function() {
+            localStorage.clear();
+            document.getElementById('storage-status').innerHTML = '<div class="status success">✓ Storage cleared</div>';
+        };
+        
+        // Initial checks
+        window.checkStorage();
+        console.log('Debug page loaded');
+    </script>
+</body>
+</html>
