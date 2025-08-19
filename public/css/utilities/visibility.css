@@ -1,1 +1,13 @@
-/* Utilities: visibility (placeholder) */
+/* App visibility states */
+#login-container { display: block; }
+.main-container { display: none; }
+.app-visible .main-container { display: flex; }
+.app-visible .login-page { display: none !important; }
+.app-visible #login-container { display: none !important; }
+.app-visible .official-header { display: flex; }
+.app-visible .main-content { display: block; flex: 1; padding: 20px; margin-top: var(--header-height, 80px); }
+.app-visible .sidebar { display: block; }
+
+/* Skip login button */
+.skip-login-btn { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; z-index: 10000; font-size: 0.9rem; }
+.skip-login-btn:hover { background: #218838; }

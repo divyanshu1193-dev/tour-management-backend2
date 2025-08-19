@@ -10,3 +10,10 @@
 /* Modal sizes */
 .extra-large-modal { max-width: 1200px; width: 95%; max-height: 90vh; overflow-y: auto; }
 .large-modal { max-width: 800px; width: 95%; }
+
+/* Image modal */
+.image-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; z-index: 3000; }
+.image-modal.active { display: flex; }
+.image-modal-content { max-width: 90%; max-height: 90%; position: relative; }
+.image-modal img { max-width: 100%; max-height: 100%; border-radius: 8px; }
+.image-modal-close { position: absolute; top: -40px; right: 0; background: #fff; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }

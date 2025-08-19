@@ -1409,45 +1409,7 @@ body {
 /* View controls and status colors moved to utilities/helpers.css */
 
 /* Show login by default, hide main app initially */
-#login-container {
-    display: block;
-}
-
-.main-container {
-    display: none;
-}
-
-/* Show main app when logged in */
-.app-visible .main-container {
-    display: flex;
-}
-
-/* Hide login components when logged in */
-.app-visible .login-page {
-    display: none !important;
-}
-
-.app-visible #login-container {
-    display: none !important;
-}
-
-/* Show header when logged in */
-.app-visible .official-header {
-    display: flex;
-}
-
-/* Ensure main content area is visible */
-.app-visible .main-content {
-    display: block;
-    flex: 1;
-    padding: 20px;
-    margin-top: 80px; /* Account for fixed header */
-}
-
-/* Ensure sidebar is visible */
-.app-visible .sidebar {
-    display: block;
-}
+/* App visibility moved to utilities/visibility.css */
 
 /* Role-based Navigation */
 .user-role .admin-only {
@@ -1904,37 +1866,7 @@ body {
     z-index: 3000;
 }
 
-.image-modal.active {
-    display: flex;
-}
-
-.image-modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-}
-
-.image-modal img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 8px;
-}
-
-.image-modal-close {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+/* Image modal moved to components/modals.css */
 
 /* New Application Page Styles */
 .new-application-content {

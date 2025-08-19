@@ -121,104 +121,9 @@ body {
     transition: all 0.2s ease;
 }
 /* Enhanced My Applications Table */
-#myApplicationsTable th,
-#myApplicationsTable td {
-    text-align: center;
-    vertical-align: middle;
-}
-.application-type-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-.application-type-badge.official {
-    background: #d1ecf1;
-    color: #0c5460;
-}
-.application-type-badge.training {
-    background: #fff3cd;
-    color: #856404;
-}
-.application-type-badge.conference {
-    background: #e2e3e5;
-    color: #383d41;
-}
-/* Enhanced My Tours Table */
-#myToursTable th,
-#myToursTable td {
-    text-align: center;
-    vertical-align: middle;
-}
-.tour-status-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-.tour-status-badge.ongoing {
-    background: #d1ecf1;
-    color: #0c5460;
-}
-.tour-status-badge.upcoming {
-    background: #e2e3e5;
-    color: #383d41;
-}
-.tour-status-badge.completed {
-    background: #d4edda;
-    color: #155724;
-}
-.travel-status-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-.travel-status-badge.not-started {
-    background: #f8d7da;
-    color: #721c24;
-}
-.travel-status-badge.in-progress {
-    background: #fff3cd;
-    color: #856404;
-}
-.travel-status-badge.completed {
-    background: #d4edda;
-    color: #155724;
-}
-/* Standard Table Cell Styles */
-.route-cell {
-    text-align: center;
-    min-width: 120px;
-    line-height: 1.2;
-}
-.route-cell .start-icon {
-    color: #28a745;
-}
-.route-cell .end-icon {
-    color: #dc3545;
-}
-.route-cell .fas.fa-arrow-down {
-    color: #6c757d;
-    font-size: 0.8rem;
-}
-.date-cell {
-    min-width: 100px;
-    text-align: center;
-}
-.date-cell strong {
-    font-size: 0.85rem;
-    color: #333;
-}
-.date-cell small {
-    color: #6c757d;
-    font-size: 0.7rem;
-}
-.request-cell {
-    min-width: 110px;
-}
+/* Applications & Tours table headers moved to components/tables.css */
+/* Tour status badges moved to components/tables.css */
+/* Travel and table cell badges moved to components/badges.css and components/tables.css */
 .request-cell strong {
     color: #007bff;
     font-size: 0.85rem;
@@ -1271,81 +1176,9 @@ body {
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
 }
-/* View Controls */
-.view-controls {
-    display: flex;
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid #ddd;
-}
-.view-controls .btn {
-    border-radius: 0;
-    border: none;
-}
-.view-controls .btn.active {
-    background: #007bff;
-    color: white;
-}
-/* Date Range */
-.date-range {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.date-range input {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-}
-.date-range span {
-    color: #6c757d;
-}
-/* Status Colors */
-.text-success {
-    color: #28a745 !important;
-}
-.text-warning {
-    color: #ffc107 !important;
-}
-.text-info {
-    color: #17a2b8 !important;
-}
-.text-muted {
-    color: #6c757d !important;
-}
+/* View controls and status colors moved to utilities/helpers.css */
 /* Show login by default, hide main app initially */
-#login-container {
-    display: block;
-}
-.main-container {
-    display: none;
-}
-/* Show main app when logged in */
-.app-visible .main-container {
-    display: flex;
-}
-/* Hide login components when logged in */
-.app-visible .login-page {
-    display: none !important;
-}
-.app-visible #login-container {
-    display: none !important;
-}
-/* Show header when logged in */
-.app-visible .official-header {
-    display: flex;
-}
-/* Ensure main content area is visible */
-.app-visible .main-content {
-    display: block;
-    flex: 1;
-    padding: 20px;
-    margin-top: 80px; /* Account for fixed header */
-}
-/* Ensure sidebar is visible */
-.app-visible .sidebar {
-    display: block;
-}
+/* App visibility moved to utilities/visibility.css */
 /* Role-based Navigation */
 .user-role .admin-only {
     display: none !important;
@@ -1774,34 +1607,7 @@ body {
     justify-content: center;
     z-index: 3000;
 }
-.image-modal.active {
-    display: flex;
-}
-.image-modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-}
-.image-modal img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 8px;
-}
-.image-modal-close {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+/* Image modal moved to components/modals.css */
 /* New Application Page Styles */
 .new-application-content {
     max-width: 1200px;
@@ -1998,6 +1804,12 @@ a:hover { text-decoration: underline; }
 /* Forms */
 .form-group { margin-bottom: 1rem; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-section { margin-bottom: 2rem; padding: 1.5rem; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafafa; }
+.section-title { color: #000080; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #138808; }
+.travel-section, .travel-mode-section, .cost-breakdown { margin-top: 1.5rem; padding: 1rem; background: #fff; border-radius: 6px; border-left: 4px solid #007bff; }
+.datetime-group { display: grid; grid-template-columns: 2fr 1fr; gap: 0.5rem; }
+.radio-group { display: flex; gap: 1rem; }
+.radio-label { display: flex; gap: 0.5rem; align-items: center; }
 /* Cards (placeholder) */
 /* Modals */
 .modal-content { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
@@ -2010,21 +1822,63 @@ a:hover { text-decoration: underline; }
 /* Modal sizes */
 .extra-large-modal { max-width: 1200px; width: 95%; max-height: 90vh; overflow-y: auto; }
 .large-modal { max-width: 800px; width: 95%; }
+/* Image modal */
+.image-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; z-index: 3000; }
+.image-modal.active { display: flex; }
+.image-modal-content { max-width: 90%; max-height: 90%; position: relative; }
+.image-modal img { max-width: 100%; max-height: 100%; border-radius: 8px; }
+.image-modal-close { position: absolute; top: -40px; right: 0; background: #fff; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 /* Tables */
 .table-container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
 .table-wrapper { overflow-x: auto; border-radius: 12px; }
-/* Users Table */
-.users-table-container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
-.users-table { width: 100%; border-collapse: collapse; }
-.users-table th, .users-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #e9ecef; }
-.users-table th { background: #f8f9fa; font-weight: 600; color: #495057; }
-.user-info { display: flex; align-items: center; gap: 1rem; }
-.user-info h4 { margin: 0 0 0.25rem; font-size: 0.95rem; }
-.user-info p { margin: 0; color: #6c757d; font-size: 0.85rem; }
-.user-avatar { width: 40px; height: 40px; border-radius: 50%; background: #007bff; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem; }
-.role-badge, .status-badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+/* Generic data table */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1200px; }
+.data-table th { background: linear-gradient(135deg, #f8f9fa, #e9ecef); font-weight: 600; text-align: center; vertical-align: middle; padding: 1rem 0.5rem; border-right: 1px solid #dee2e6; white-space: nowrap; }
+.data-table td { padding: 0.75rem 0.5rem; border-right: 1px solid #f1f3f4; border-bottom: 1px solid #e9ecef; vertical-align: top; text-align: center; }
+.data-table tbody tr:hover { background: linear-gradient(135deg, #f8f9fa, #e3f2fd); transform: scale(1.001); transition: all 0.2s ease; }
+/* Responsive tweaks from legacy */
+@media (max-width: 1024px) {
+  .data-table { min-width: 1000px; font-size: 0.8rem; }
+  .data-table th, .data-table td { padding: 0.5rem 0.25rem; }
+}
+@media (max-width: 768px) {
+  .data-table { min-width: 800px; font-size: 0.75rem; }
+}
+/* Enhanced My Applications Table */
+#myApplicationsTable th, #myApplicationsTable td { text-align: center; vertical-align: middle; }
+.application-type-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.application-type-badge.official { background: #d1ecf1; color: #0c5460; }
+.application-type-badge.training { background: #fff3cd; color: #856404; }
+.application-type-badge.conference { background: #e2e3e5; color: #383d41; }
+/* Enhanced My Tours Table */
+#myToursTable th, #myToursTable td { text-align: center; vertical-align: middle; }
+.tour-status-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.tour-status-badge.ongoing { background: #d1ecf1; color: #0c5460; }
+.tour-status-badge.upcoming { background: #e2e3e5; color: #383d41; }
+.tour-status-badge.completed { background: #d4edda; color: #155724; }
+/* Standard table cell styles */
+.route-cell { text-align: center; min-width: 120px; line-height: 1.2; }
+.route-cell .start-icon { color: #28a745; }
+.route-cell .end-icon { color: #dc3545; }
+.route-cell .fas.fa-arrow-down { color: #6c757d; font-size: 0.8rem; }
+.date-cell { min-width: 100px; text-align: center; }
+.date-cell strong { font-size: 0.85rem; color: #333; }
+.date-cell small { color: #6c757d; font-size: 0.7rem; }
+.request-cell { min-width: 110px; }
 /* Badges */
 .role-badge, .status-badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+.application-type-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.application-type-badge.official { background: #d1ecf1; color: #0c5460; }
+.application-type-badge.training { background: #fff3cd; color: #856404; }
+.application-type-badge.conference { background: #e2e3e5; color: #383d41; }
+.tour-status-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.tour-status-badge.ongoing { background: #d1ecf1; color: #0c5460; }
+.tour-status-badge.upcoming { background: #e2e3e5; color: #383d41; }
+.tour-status-badge.completed { background: #d4edda; color: #155724; }
+.travel-status-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+.travel-status-badge.not-started { background: #f8d7da; color: #721c24; }
+.travel-status-badge.in-progress { background: #fff3cd; color: #856404; }
+.travel-status-badge.completed { background: #d4edda; color: #155724; }
 /* Dropdowns (placeholder) */
 /* Notifications / Alerts (cards are also used on Alerts page) */
 .alert-list { display: flex; flex-direction: column; gap: 0.75rem; }
@@ -2113,6 +1967,13 @@ a:hover { text-decoration: underline; }
 .report-content { padding: 1.25rem; }
 .chart-placeholder { background: #f8f9fa; border: 1px dashed #dee2e6; border-radius: 8px; padding: 1.5rem; text-align: center; color: #6c757d; font-size: 0.95rem; }
 .recent-reports h3 { margin-bottom: 0.75rem; }
+/* Map blocks */
+.map-card .card-content { padding: 0; }
+.map-container { height: 400px; background: #f8f9fa; border-radius: 8px; border: 1px dashed #dee2e6; display: grid; place-items: center; color: #6c757d; }
+.map-placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: #6c757d; }
+.map-placeholder i { font-size: 3rem; margin-bottom: 1rem; }
+.map-full { height: calc(100vh - 200px); }
+.map-container-full { height: 100%; background: #fff; border-radius: 12px; }
 /* Responsive tweaks aligned with alerts */
 @media (max-width: 768px) {
   .reports-filters { flex-direction: column; align-items: stretch; }
@@ -2153,8 +2014,29 @@ a:hover { text-decoration: underline; }
 .summary-card { background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 1rem; border-left: 4px solid #007bff; }
 .summary-card.pending { border-left-color: #ffc107; }
 .summary-card.approved { border-left-color: #28a745; }
-/* Utilities: helpers (placeholder) */
+/* View controls & status colors */
+.view-controls { display: flex; border-radius: 6px; overflow: hidden; border: 1px solid #ddd; }
+.view-controls .btn { border-radius: 0; border: none; }
+.view-controls .btn.active { background: #007bff; color: #fff; }
+.date-range { display: flex; align-items: center; gap: 0.5rem; }
+.date-range input { padding: 0.5rem; border: 1px solid #ddd; border-radius: 6px; }
+.date-range span { color: #6c757d; }
+.text-success { color: #28a745 !important; }
+.text-warning { color: #ffc107 !important; }
+.text-info { color: #17a2b8 !important; }
+.text-muted { color: #6c757d !important; }
 /* Utilities: spacing (placeholder) */
 /* Utilities: display (placeholder) */
 /* Utilities: colors (placeholder) */
-/* Utilities: visibility (placeholder) */
+/* App visibility states */
+#login-container { display: block; }
+.main-container { display: none; }
+.app-visible .main-container { display: flex; }
+.app-visible .login-page { display: none !important; }
+.app-visible #login-container { display: none !important; }
+.app-visible .official-header { display: flex; }
+.app-visible .main-content { display: block; flex: 1; padding: 20px; margin-top: var(--header-height, 80px); }
+.app-visible .sidebar { display: block; }
+/* Skip login button */
+.skip-login-btn { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; z-index: 10000; font-size: 0.9rem; }
+.skip-login-btn:hover { background: #218838; }
