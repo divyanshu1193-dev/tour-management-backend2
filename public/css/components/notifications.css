@@ -1,1 +1,32 @@
-/* Notifications (placeholder) */
+/* Notifications / Alerts (cards are also used on Alerts page) */
+.alert-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.alert-item { display: flex; align-items: flex-start; gap: 0.75rem; background: #fff; padding: 1rem; border-left: 4px solid #ddd; border-radius: 8px; }
+.alert-item.warning { background: #fff3cd; border-left-color: #ffc107; }
+.alert-item.danger { background: #f8d7da; border-left-color: #dc3545; }
+.alert-item i { margin-top: 0.25rem; }
+.alert-details p { margin: 0 0 0.25rem; font-size: 0.9rem; }
+.alert-details span { font-size: 0.8rem; color: #6c757d; }
+
+.alert-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 1.25rem; display: flex; gap: 1rem; border-left: 4px solid #ddd; }
+.alert-card.critical { border-left-color: #dc3545; }
+.alert-card.warning { border-left-color: #ffc107; }
+.alert-card.info { border-left-color: #17a2b8; }
+.alert-icon { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: #fff; flex-shrink: 0; }
+.alert-card.critical .alert-icon { background: #dc3545; }
+.alert-card.warning .alert-icon { background: #ffc107; }
+.alert-content { flex: 1; }
+.alert-content h4 { margin: 0 0 0.5rem; font-size: 1rem; }
+.alert-content p { margin: 0 0 1rem; color: #6c757d; }
+.alert-meta { display: flex; gap: 1rem; font-size: 0.85rem; color: #6c757d; }
+.alert-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+
+/* Responsive variants from legacy */
+@media (max-width: 768px) {
+  .alert-actions { flex-direction: row; gap: 0.75rem; align-self: stretch; }
+  .alert-meta { flex-direction: column; gap: 0.25rem; }
+}
+@media (max-width: 480px) {
+  .alert-card { padding: 0.75rem; }
+  .alert-content h4 { font-size: 0.95rem; }
+  .alert-content p { font-size: 0.85rem; }
+}

@@ -1,4 +1,8 @@
 /* Entry point for modular CSS build */
+/* 1) Legacy first to preserve original behavior */
+@import './legacy.css';
+
+/* 2) Then modular layers to override/replace gradually */
 @import './base/reset.css';
 @import './base/variables.css';
 @import './base/typography.css';
@@ -30,6 +34,3 @@
 @import './utilities/display.css';
 @import './utilities/colors.css';
 @import './utilities/visibility.css';
-
-/* Temporary: import legacy styles to keep UI intact while we split */
-@import './legacy.css';

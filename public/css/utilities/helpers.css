@@ -1,1 +1,11 @@
-/* Utilities: helpers (placeholder) */
+/* View controls & status colors */
+.view-controls { display: flex; border-radius: 6px; overflow: hidden; border: 1px solid #ddd; }
+.view-controls .btn { border-radius: 0; border: none; }
+.view-controls .btn.active { background: #007bff; color: #fff; }
+.date-range { display: flex; align-items: center; gap: 0.5rem; }
+.date-range input { padding: 0.5rem; border: 1px solid #ddd; border-radius: 6px; }
+.date-range span { color: #6c757d; }
+.text-success { color: #28a745 !important; }
+.text-warning { color: #ffc107 !important; }
+.text-info { color: #17a2b8 !important; }
+.text-muted { color: #6c757d !important; }

@@ -1,1 +1,14 @@
-/* Badges (placeholder) */
+/* Badges */
+.role-badge, .status-badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+.application-type-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.application-type-badge.official { background: #d1ecf1; color: #0c5460; }
+.application-type-badge.training { background: #fff3cd; color: #856404; }
+.application-type-badge.conference { background: #e2e3e5; color: #383d41; }
+.tour-status-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.tour-status-badge.ongoing { background: #d1ecf1; color: #0c5460; }
+.tour-status-badge.upcoming { background: #e2e3e5; color: #383d41; }
+.tour-status-badge.completed { background: #d4edda; color: #155724; }
+.travel-status-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+.travel-status-badge.not-started { background: #f8d7da; color: #721c24; }
+.travel-status-badge.in-progress { background: #fff3cd; color: #856404; }
+.travel-status-badge.completed { background: #d4edda; color: #155724; }

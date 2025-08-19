@@ -1,1 +1,9 @@
-/* Tours page (placeholder) */
+/* Tours Page & queues */
+.summary-card.rejected { border-left-color: #dc3545; }
+.completion-queue-container { display: flex; flex-direction: column; gap: 1.5rem; }
+.completion-verification-item { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; border-left: 4px solid #007bff; }
+.completion-verification-item.pending { border-left-color: #ffc107; }
+.completion-verification-item.verified { border-left-color: #28a745; }
+.completion-verification-item.rejected { border-left-color: #dc3545; }
+.completion-header { padding: 1.5rem; background: #f8f9fa; border-bottom: 1px solid #e9ecef; display: flex; justify-content: space-between; align-items: center; }
+.completion-body { padding: 1.5rem; display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; }

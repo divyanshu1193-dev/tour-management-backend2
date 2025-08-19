@@ -1,1 +1,42 @@
-/* Tables (placeholder) */
+/* Tables */
+.table-container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
+.table-wrapper { overflow-x: auto; border-radius: 12px; }
+
+/* Generic data table */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1200px; }
+.data-table th { background: linear-gradient(135deg, #f8f9fa, #e9ecef); font-weight: 600; text-align: center; vertical-align: middle; padding: 1rem 0.5rem; border-right: 1px solid #dee2e6; white-space: nowrap; }
+.data-table td { padding: 0.75rem 0.5rem; border-right: 1px solid #f1f3f4; border-bottom: 1px solid #e9ecef; vertical-align: top; text-align: center; }
+.data-table tbody tr:hover { background: linear-gradient(135deg, #f8f9fa, #e3f2fd); transform: scale(1.001); transition: all 0.2s ease; }
+
+/* Responsive tweaks from legacy */
+@media (max-width: 1024px) {
+  .data-table { min-width: 1000px; font-size: 0.8rem; }
+  .data-table th, .data-table td { padding: 0.5rem 0.25rem; }
+}
+@media (max-width: 768px) {
+  .data-table { min-width: 800px; font-size: 0.75rem; }
+}
+
+/* Enhanced My Applications Table */
+#myApplicationsTable th, #myApplicationsTable td { text-align: center; vertical-align: middle; }
+.application-type-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.application-type-badge.official { background: #d1ecf1; color: #0c5460; }
+.application-type-badge.training { background: #fff3cd; color: #856404; }
+.application-type-badge.conference { background: #e2e3e5; color: #383d41; }
+
+/* Enhanced My Tours Table */
+#myToursTable th, #myToursTable td { text-align: center; vertical-align: middle; }
+.tour-status-badge { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.tour-status-badge.ongoing { background: #d1ecf1; color: #0c5460; }
+.tour-status-badge.upcoming { background: #e2e3e5; color: #383d41; }
+.tour-status-badge.completed { background: #d4edda; color: #155724; }
+
+/* Standard table cell styles */
+.route-cell { text-align: center; min-width: 120px; line-height: 1.2; }
+.route-cell .start-icon { color: #28a745; }
+.route-cell .end-icon { color: #dc3545; }
+.route-cell .fas.fa-arrow-down { color: #6c757d; font-size: 0.8rem; }
+.date-cell { min-width: 100px; text-align: center; }
+.date-cell strong { font-size: 0.85rem; color: #333; }
+.date-cell small { color: #6c757d; font-size: 0.7rem; }
+.request-cell { min-width: 110px; }

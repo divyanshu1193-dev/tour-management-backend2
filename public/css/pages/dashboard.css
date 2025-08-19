@@ -1,1 +1,11 @@
-/* Dashboard page (placeholder) */
+/* Dashboard/general page scaffolding */
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.page-header h1 { font-size: 2rem; font-weight: 500; color: #333; }
+.header-actions { display: flex; align-items: center; gap: 1rem; }
+
+/* Summary cards shared by dashboard/tours/applications */
+.application-summary, .tour-summary { margin-bottom: 2rem; }
+.summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.summary-card { background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 1rem; border-left: 4px solid #007bff; }
+.summary-card.pending { border-left-color: #ffc107; }
+.summary-card.approved { border-left-color: #28a745; }

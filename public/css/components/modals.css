@@ -1,1 +1,12 @@
-/* Modals (placeholder) */
+/* Modals */
+.modal-content { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
+.modal-header { padding: 1.5rem; border-bottom: 1px solid #e9ecef; display: flex; justify-content: space-between; align-items: center; }
+.modal-header h3 { margin: 0; font-size: 1.3rem; }
+.btn-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6c757d; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s; }
+.btn-close:hover { background: #f8f9fa; }
+.modal-body { padding: 1.5rem; }
+.modal-footer { padding: 1.5rem; border-top: 1px solid #e9ecef; display: flex; justify-content: flex-end; gap: 1rem; }
+
+/* Modal sizes */
+.extra-large-modal { max-width: 1200px; width: 95%; max-height: 90vh; overflow-y: auto; }
+.large-modal { max-width: 800px; width: 95%; }

@@ -1,1 +1,30 @@
-/* Alerts page (placeholder) */
+/* Alerts Page */
+.alerts-content { display: grid; gap: 1.5rem; }
+.alerts-filters { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.alerts-filters .filter-group { display: flex; align-items: center; gap: 0.5rem; }
+.alerts-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.alerts-stats .stat-card { background: #fff; padding: 1rem 1.25rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 1rem; }
+.alerts-stats .stat-icon { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; color: #fff; }
+.alerts-stats .stat-icon.danger { background: #dc3545; }
+.alerts-stats .stat-icon.warning { background: #ffc107; color: #333; }
+.alerts-stats .stat-icon.info { background: #17a2b8; }
+.alerts-list { display: grid; gap: 1rem; }
+.alert-item { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 1.5rem; display: grid; grid-template-columns: 40px 1fr auto; gap: 1rem; align-items: start; border-left: 4px solid #007bff; }
+.alert-item.critical { border-left-color: #dc3545; }
+.alert-item.high { border-left-color: #fd7e14; }
+.alert-item.medium { border-left-color: #ffc107; }
+.alert-item.unread { background: #fffdf4; }
+.alert-icon { display: grid; place-items: center; color: #6c757d; }
+.alert-content .alert-header { display: flex; justify-content: space-between; align-items: center; }
+.alert-content h4 { margin: 0; font-size: 1rem; color: #333; }
+.alert-time { font-size: 0.85rem; color: #6c757d; }
+.alert-details p { margin: 0.25rem 0 0.5rem; color: #555; }
+.alert-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; font-size: 0.85rem; color: #6c757d; }
+.alert-actions .btn { margin-left: 0.5rem; }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .alerts-filters { flex-direction: column; align-items: stretch; }
+  .alert-item { grid-template-columns: 32px 1fr; }
+  .alert-actions { grid-column: 1 / -1; display: flex; gap: 0.5rem; justify-content: flex-end; }
+}
