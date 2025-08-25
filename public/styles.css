@@ -255,6 +255,43 @@ body {
     transition: all 0.2s;
     text-decoration: none;
 }
+
+/* Approval Queue UI Enhancements */
+.approval-queue-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+}
+.approval-item.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid #eef1f4;
+}
+.approval-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem 0.25rem 1rem;
+}
+.applicant-info { display:flex; align-items:center; gap:0.75rem; }
+.applicant-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    background: #e9f2ff; color:#1b72e8; font-weight:700;
+}
+.approval-body { padding: 0.75rem 1rem 1rem 1rem; }
+.tour-details { display:flex; gap:0.75rem; flex-wrap:wrap; }
+.tour-details .detail-item { background:#f6f8fa; padding:0.35rem 0.6rem; border-radius:8px; font-size:0.85rem; color:#475569; }
+.approval-actions { display:flex; gap:0.5rem; margin-top:0.75rem; }
+
+/* Modal details layout */
+.details-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; }
+.details-grid section { background:#fff; border:1px solid #eef1f4; border-radius:10px; padding:0.75rem 1rem; }
+.details-grid h4 { margin-bottom:0.5rem; font-size:1rem; color:#334155; }
+.kv { display:flex; justify-content:space-between; gap:1rem; padding:0.35rem 0; border-bottom:1px dashed #eef1f4; }
+.kv span { color:#64748b; font-size:0.85rem; }
+.kv strong { color:#0f172a; font-size:0.9rem; }
 .btn-primary {
     background: #007bff;
     color: white;

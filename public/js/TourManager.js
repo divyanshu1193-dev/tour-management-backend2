@@ -180,7 +180,70 @@ export class TourManager {
     document.addEventListener('click', e => {
       if (e.target.matches('.queue-approve-btn')) approveFromQueue(this, e.target.dataset.appId);
       if (e.target.matches('.queue-reject-btn')) rejectFromQueue(this, e.target.dataset.appId);
+      if (e.target.matches('.view-application-btn')) {
+        const id = e.target.dataset.appId;
+        const app = window.__appsCache?.get(String(id));
+        if (app) {
+          const body = document.getElementById('applicationDetailsBody');
+          if (body) {
+            body.innerHTML = renderApplicationDetailsHTML(app);
+          }
+          const modal = document.getElementById('applicationDetailsModal');
+          if (modal) modal.style.display = 'block';
+        }
+      }
     });
+
+    // Helper to build details HTML
+    function renderApplicationDetailsHTML(app) {
+      // Safely format arrays and objects
+      const docs = (() => {
+        try {
+          const parsed = typeof app.supporting_documents === 'string' ? JSON.parse(app.supporting_documents) : app.supporting_documents;
+          if (Array.isArray(parsed) && parsed.length) {
+            return `<ul>` + parsed.map(d => `<li><i class='fas fa-paperclip'></i> ${d.originalname || d.filename}</li>`).join('') + `</ul>`;
+          }
+          return '<em>No documents</em>';
+        } catch { return '<em>No documents</em>'; }
+      })();
+
+      return `
+        <div class="details-grid">
+          <section>
+            <h4>Applicant</h4>
+            <div class="kv"><span>Full Name</span><strong>${app.full_name || '-'}</strong></div>
+            <div class="kv"><span>Employee ID</span><strong>${app.employee_id || '-'}</strong></div>
+            <div class="kv"><span>Department</span><strong>${app.department || '-'}</strong></div>
+          </section>
+          <section>
+            <h4>Tour</h4>
+            <div class="kv"><span>Type</span><strong>${app.type || '-'}</strong></div>
+            <div class="kv"><span>Route</span><strong>${app.origin} → ${app.destination}</strong></div>
+            <div class="kv"><span>Dates</span><strong>${app.from_date?.slice(0,10)} – ${app.to_date?.slice(0,10)}</strong></div>
+            <div class="kv"><span>Time</span><strong>${app.from_time || '-'} → ${app.to_time || '-'}</strong></div>
+            <div class="kv"><span>Purpose</span><strong>${app.purpose || '-'}</strong></div>
+          </section>
+          <section>
+            <h4>Travel & Costs</h4>
+            <div class="kv"><span>Mode</span><strong>${app.travel_mode || '-'}</strong></div>
+            <div class="kv"><span>Accommodation</span><strong>${String(app.accommodation_required) === 'true' || app.accommodation_required === true ? 'Yes' : 'No'}</strong></div>
+            <div class="kv"><span>Transport</span><strong>${String(app.transport_required) === 'true' || app.transport_required === true ? 'Yes' : 'No'}</strong></div>
+            <div class="kv"><span>Estimated Cost</span><strong>${app.estimated_cost ? `₹${app.estimated_cost}` : '-'}</strong></div>
+          </section>
+          <section>
+            <h4>Attachments</h4>
+            ${docs}
+          </section>
+          <section>
+            <h4>Meta</h4>
+            <div class="kv"><span>Application ID</span><strong>${app.application_id}</strong></div>
+            <div class="kv"><span>Priority</span><strong>${app.priority || '-'}</strong></div>
+            <div class="kv"><span>Submitted</span><strong>${app.submitted_date || '-'}</strong></div>
+            <div class="kv"><span>Status</span><strong>${app.status}</strong></div>
+          </section>
+        </div>
+      `;
+    }
 
     // Completion / Verification
     document.addEventListener('click', e => {

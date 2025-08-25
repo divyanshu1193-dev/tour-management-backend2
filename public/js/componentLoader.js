@@ -162,7 +162,8 @@ class ComponentLoader {
             await this.loadComponents([
                 { path: 'partials/modals/enhanced-tour-modal.html', containerId: 'modals-container' },
                 { path: 'partials/modals/create-tour-modal.html', containerId: 'modals-container' },
-                { path: 'partials/modals/quick-request-modal.html', containerId: 'modals-container' }
+                { path: 'partials/modals/quick-request-modal.html', containerId: 'modals-container' },
+                { path: 'partials/modals/application-details-modal.html', containerId: 'modals-container' }
             ]);
 
             // Don't load default page here - let the auth system handle it
